@@ -3,8 +3,12 @@
     text-align: center;
     padding: 20px;
   }
+  
+  body {
+    background-color: rgb(255, 255, 255);
+  }
 
-
+/* Navigation Bar */
 
   .navbar a {
     float: left;
@@ -25,9 +29,19 @@
     background-color: #333;
   }
 
+/* Title */
+.title{
+    background-color: rgb(255, 255, 255);
+    width: 50%;
+    border: 5px solid rgb(128, 0, 0);
+    padding: 25px;
+    margin: auto;
+    text-align: center;
+}
 
-
-  .row:after {
+ /* Paragraph for section C */
+  
+ .row:after {
     content: "";
     display: table;
     clear: both;
@@ -39,19 +53,18 @@
   }
 
   .img {
-    background-color: #aaa;
-    width: 100%;
-    padding: 10px;
+    width: 25%;
+    padding: 5 px;
   }
 
+  /* The footer */
   
-  
-  .footer {
-    position: fixed;
-    left: 0;
-    bottom: 0;
-    width: 100%;
+  footer {
+      text-align: center;
+    color: rgb(255, 255, 255);
     background-color: red;
-    color: white;
-    text-align: center;
+    clear: both;
+    position: relative;
+    height: 70px;
+    margin-top: -200px
   }
