@@ -50,8 +50,6 @@ a:hover {
   color: black;
 }
 
-
-
 .title {
   margin: 0px;
   padding: 10px;
@@ -70,6 +68,16 @@ a:hover {
 .user_name{
 text-align: center;
 }
+.project_name{
+  margin: 0px;
+  padding: 10px;
+  border: 10px;
+  text-align: center;
+  margin: 0px;
+  background-color: rgba(0, 0, 0, 0.76);
+  color: rgb(255, 0, 0);
+}
+
 footer{
 text-align: center;
 background-color: black;
