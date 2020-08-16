@@ -8,7 +8,7 @@
   <link rel="stylesheet" type="text/css" href="style.css">
   <!--Google fonts link -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-  <link rel="shortcut icon" href="Images/logo.ico" type="image/x-icon"/>
+  <link rel="shortcut icon" href="Images/logo.ico" type="image/x-icon" />
 </head>
 
 <header>
@@ -215,9 +215,278 @@
   <div class="title">
     <h1>The project</h1>
   </div>
-  
-  <div class="project_name">
-    <h1>Quizzaris</h1>
+
+
+  <div class=user_profile>
+    <div class=user_name>
+      <h2>Project Description </h2>
+    </div>
+    <div class="img">
+      <img src="Images/logo.png" alt="plankton"></div>
+    <p> Quizzaris is a study app that allows students to collaborate and test each other with questions created by
+      themselves, tutors
+      and lecturers. They can choose between categories and take quizzes in a flashcard style to revise material or
+      submit their own questions based on subject and topic.
+
+      The app will allow students to take quizzes in topics of their interest. Upon checking an answer, statistics like
+      the percentage of users who chose which answers, its explanations and solution discussions will be shown. A user
+      will have a profile area so that progression is recorded and made available for each person that logs in. Quizzes,
+      answers, and comments can be voted by anyone; some people may have special attributes that enables moderator
+      clearance.
+
+      Based on personal progress, students will be able to access information on themselves such as which areas need
+      improvement. And on top of that, study plans can be created and synced with university calendars and timetables.
+      Ultimately, its main goal is to make student lives easier, and create a friendly, efficient learning environment.
+
+      Some user stories can be used to further the understanding of the project. They will be developed in the following
+      lines.
+    </p>
+    <ul>
+      <li>As an international student that recently came to Melbourne, I am having trouble keeping my study schedule up
+        to date - especially considering all events unfolding because of COVID. I am not used to having online classes,
+        since I have always relied heavily on face to face conversations and study sessions with my friends and tutors.
+        Having an intuitive layout with quick quizzes and online discussion about it would help keep me on track. </li>
+
+      <li>As a tutor, I am used to seeing student reactions and can usually have a good guess about how well the class
+        content is being absorbed. However, I feel a lack of home-based study for most of my pupils. Being able to
+        monitor overall student progress in a unified study platform, especially on very specific topics, would allow me
+        to better prepare class materials and assignment specifications. </li>
+
+      <li>As a history student, I like to explore different subjects. Recently I have started some design courses and
+        was eventually led to web programming. Through research, I feel that most of the free content available is not
+        very well structured for someone from a completely unrelated field. Moreover, I do not adapt very well to the
+        structure of posting questions and waiting for a reply on web forums. I would be very happy if I had some means
+        of doing a quick study in targeted areas with the possibility of discussions with other pupils.</li>
+
+      <li>As a lecturer, I want to make sure that students are covering the correct content and doing questions related
+        to the course when they do quizzes so I want to be able to create and moderate the kind of questions, solutions
+        and comments posted on quizzes to make sure they are not doing things off topic, not posting offensive content
+        and to make sure that people are not mislead by incorrect solution explanations.
+      </li>
+    </ul>
+  </div>
+
+  <div class="title">
+    <h1>features</h1>
+  </div>
+
+  <div class=user_profile>
+    <div class=user_name>
+      <h2>features</h2>
+    </div>
+
+    <h1>1. Users can do quizzes and see their score </h1>
+    <p>It can be stated that this is the main feature of the project. Users will be able to choose quizzes based on
+      subject topics, see solutions with explanations after answering them and have a record of their scores and
+      attempts. Within the quiz, number of questions and difficulty level will be displayed.</p>
+    <h2>Feature validation</h2>
+    <ul>
+      <li>Doing the quiz but leaving halfway through will prompt an alert that they are leaving the quiz. It will resume
+        in the same point when returned to. </li>
+      <li>Attempting to take the same quiz again will alert that the user has attempted it before but allow them to
+        proceed. </li>
+      <li>Unregistered users may take quizzes and view solutions, but their scores will not be saved. A warning message
+        on attempt/completion will appear stating that results are only saved for registered users. </li>
+    </ul>
+
+
+    <h1>2. Users should register to be able submit questions and solutions </h1>
+    <p>Registered users will be able to write their own questions. Submissions may be drafted should the user choose not
+      to submit it immediately and rated by a Turn it in style system to alert about copies or similarity levels.
+      Questions will have ratings, difficulty levels and suggestions for similar ones based on subject. Immediately
+      after submission, the author will be directed to its post and have access to answers history. </p>
+    <h2>Feature validation</h2>
+    <ul>
+      <li>Submissions of questions and answers are entered in the database.</li>
+      <li>Blank submissions are not added and get and error alert.</li>
+      <li>Non-registered users will receive a “Login required” on attempting to submit questions and answers.</li>
+      <li>Incoherent or irrelevant submissions are flagged for further review before being accepted. </li>
+    </ul>
+
+    <h1>3. Users can see achievements, scores, and their progression </h1>
+    <p>Registered users will have access to personal data highlighting progression, grades, scores, and attempt history
+      in a written and graphical manner. Upon quiz completion, general and individual quiz scores are displayed.</p>
+    <h2>Feature validation</h2>
+    <ul>
+      <li>Unregistered users will not have access to scores. On attempting to view scores a prompt will be shown asking
+        for login. </li>
+      <li>Registered users will have access to their all previous scores. If there are none, nothing will be displayed.
+      </li>
+    </ul>
+
+    <h1>4. Registered users can leave comments and discuss about the quiz under solutions </h1>
+    <p>Upon quiz completion, registered users will be able to scroll, edit, delete, and vote the comments that appear
+      below the answers. Comments will have parent and child chains and a flag icon that can be used to alerts
+      moderators. </p>
+    <h2>Feature validation</h2>
+    <ul>
+      <li>Users will have access to comments and discussions after answering the quiz. Prompt for access denied when
+        trying to view results before completing the quiz</li>
+      <li>Unregistered users can view answers but not write comments.</li>
+      <li>If a registered user tries to submit a blank comment, a message will be displayed stating that no submission
+        will be made. If the comment contains blacklisted words such as inappropriate ones, the comment will not be
+        submitted, and a prompt will be displayed stating that the comment contains blacklisted words. If a comment
+        appears to be nonsensical or is voted as off topic, it will be hidden and flagged for further inspection from
+        moderators. </li>
+      <li>If a user repeatedly flags comments that turns out to be acceptable, a time-based restriction will be put into
+        place denying them access to comment or flag. If an attempt to flag is made during that period, a prompt will be
+        shown indicating the time left before they may do it again. Likewise, if multiple flags are put against the same
+        user, the same restriction will apply. </li>
+      <li>If a user re offends, the cool down period will increase, and after the third time a prompt will appear
+        indication that the next offence will lead to permanent banishment. </li>
+    </ul>
+
+    <h1>5. Registered users can rate questions in terms of difficulty and whether the question was well written or not.
+    </h1>
+    <p>A question rating system will work based on popular voting. Should enough users flag as “needs improvement”, the
+      question will be hidden, and a message will be sent to the author to revise it. Moderators may also do
+      modifications. The most up voted ones will come to the top sections, and the down votes will push it down. Besides
+      up and down votes, difficulty ranking can also be established as beginner, intermediate, advanced. </p>
+    <h2>Feature validation</h2>
+    <ul>
+      <li>Unregistered used will be denied the ability to rate question difficulty and quality </li>
+      <li>Registered users will only be allowed to change their votes once </li>
+      <li>Edited questions will have their ratings reset </li>
+      <li>Up voting enough may mark the question for review by moderation </li>
+    </ul>
+  </div>
+
+
+
+  <div class=user_profile>
+    <div class=user_name>
+      <h2>Extended Features </h2>
+    </div>
+    <h1>1. Registered users can create study plans based on university calendar or timetable. </h1>
+    <p>User area can be synced with university timetables and schedules through Google and Outlook calendars which be
+      updated through .cal files. Study schedules can be mutable according to student progression and topic relevance.
+      Study session efficiency is measured according to quiz scores, and areas in need of improvement highlighted based
+      on topics of wrongly answered questions. </p>
+    <ul>
+      <li>If a user is not registered with a student email, they will not be able to sync timetables and will only be
+        able to manually input timetable info and assignment times/topics. </li>
+      <li>Unregistered users will not have access to this function. </li>
+      <li>If a user is registered with a student email but fails to sync timetable data, they will be given the option
+        to try again or input manually. </li>
+    </ul>
+
+    <h1>2. Registered users can compare their scores and performance against an aggregate of other users. </h1>
+    <p>User profiles will contain personal scores that can be set to visible or hidden. Higher level users bypass hidden
+      scores, and friends can compare score progression based on subject topics. </p>
+    <ul>
+      <li>If an unregistered user attempts to view scores of other users they will be denied, shown an error message
+        indicating that they cannot view it due to not being a registered user. If they attempt to message or contact
+        said user they will be denied and the message not sent. </li>
+      <li>If a registered user attempts to view other users scores, they will be shown an overview of the user's
+        profile. If the user attempts to look at individual scores and private information they will be denied access
+        and show a message that they do not have high enough privilege to view this information. If the other user has
+        privacy settings on, attempting to view their scores will prompt a message that their profile is private, and
+        you cannot view their info. If the other user has privacy settings on, they can still be messaged and sending a
+        message to another unknown registered user will be processed. </li>
+
+      <li>A registered user that is certified a high level user (moderator, lecturer) can view all information. </li>
+    </ul>
+
+    <h1>3. Registered users can compare their scores and performance against an aggregate of other users. </h1>
+    <p>Different permissions allow users to perform different actions, like editing, deleting, or flagging comments,
+      creating questions and quizzes, prioritizing comments and votes, making announcements, changes to subject
+      categories, or even banning other users. </p>
+    <ul>
+      <li>A registered user that is certified a high-level user (moderator, lecturer) can view all information of
+        others.</li>
+      <li>Base level users can access quizzes, create questions and answers. They will not have to option visible to
+        them to edit other users' comments. </li>
+
+      <li>If a user registers and applies for higher level clearance but does not supply ID, they are denied. If they
+        supply their university email and university ID and a universally recognised ID, it will be processed and
+        checked by someone in admin before their clearance is given. </li>
+
+      <li>If a user attempts to impersonate a higher-level person for clearance, both accounts will be suspended until
+        admin can confirm ID of the account owner. </li>
+    </ul>
+  </div>
+
+
+  <div class=user_profile>
+    <div class=user_name>
+      <h1>Project motivation</h1>
+    </div>
+
+    <h2>Describe what motivated your group to choose this project? </h2>
+    <p>The group started off with the idea of an app related to study or productivity because of the very well-known
+      struggles associated with studying and university life. During a brainstorm session, the popular website Kahoot!
+      was briefly mentioned. It is basically an online quiz game: an admin provides the users with a code that can be
+      used to join a room. Inside it, a question followed by four flashcards appear on screen under a timer and whoever
+      gets the rights answers faster wins. However, the application was greatly gamified and resulted in students who
+      are not serious to ruin the learning experienced for the other students. Not only did this hinder the learning
+      process for the students but also distracted the teachers from focusing on class.
+
+      Another application that the team had a look at was piazza which allows students to sign up and participate in
+      quizzes with the team. However, the application does not let a student sign up without a valid classroom. This
+      results in the students being unable to sign up and practice without being a part of a class.
+
+      That proved to be the inspiration that kick started the project and set us off with the idea of educational
+      quizzes
+      facilitated by the use of flashcards, which answers could be uploaded by students or lecturers, progress measured,
+      content voted and synced with universities content and course structures. </p>
+
+    <h2>How does it relate to your individual and collective interests? It is a laudable aim to try and create something
+      which is beyond your current knowledge level and which addresses areas where you can enrich your IT Skills?</h2>
+
+    <p>Considering we are all students that mostly have done the same courses and no industry experience, web developing
+      skills are not yet fully developed among us. In addition, none of us have ever handled and delivered an IT project
+      like this. For the completion of this assignment we are going to need knowledge in web development: specifically,
+      HTML, CSS and Java script. Some database handling and integration with websites, design notions and teamwork.
+      Considering our team, its diversity, different background and individual interests, it could be said that although
+      not easy, there is potential for the project to be completed by the end of the semester. </p>
+  </div>
+
+  <div class="title">
+    <h1>Project Justification</h1>
+  </div>
+
+  <div class=user_profile>
+    <div class=user_name>
+      <h1>Justified Workloads</h1>
+    </div>
+    <h2>Justified Workloads</h2>
+    <p>The project requires the team to look up and implement several features that we have no prior knowledge about.
+      Most of the time will be devoted to individual research and its following implementation inside the project scope
+      for .e.g. none of the members in the team are very familiar with JavaScript and PHP which would be most likely
+      used in the project. The use of other technologies will be researched and implemented as we go which would not
+      only make the application better but also assist the team in learning about the various technologies used in the
+      broader Information technology field. </p>
+
+    <div class="img">
+      <img src="Images/table.JPG" alt="scary"></div>
+
+    <h2>Beyond Current Capabilities</h2>
+    <p>The idea of the project is to extend your individual current IT knowledge. In this section you will explain what
+      your current knowledge is and how completion of the project will extend it. We are looking to see how someone who
+      might consider coding to not be their best skill, to use this project to improve their coding skills. If you are
+      honest, this project will be of great benefit to your IT development. It’s important that each group member tries
+      to move out of their current “comfort zone”.
+
+      As outlined above the team members have very little experience with building websites, the website and its
+      capabilities will require the team members to learn more about web programming including using JavaScript and
+      perhaps PHP. The team also has very little experience with teamwork and project management work which requires
+      good communication and time management skills. As a result of this course the team will have to learn these along
+      with the technical skills to successfully complete a project and deliver a product. </p>
+
+    <h2>Project Risk</h2>
+    <p>The project relies on the diversity of the knowledge, which might suddenly get copied or the user might not
+      continue to use the website because of the lack of difference of the knowledge. And the learning cost is also a
+      risk for the questioner, for those people who already familiar with the original program or website that they use
+      or people who get used to the traditional way to question people, it is hard for them to change to use our project
+      which might decrease the number of potential users. On the other hand, the comfort U.I might be one of the issue
+      of this project, since the people are get in touch with more kinds of website nowadays it is important that avoid
+      user to not feel like the U.I design is not practical. Moreover the project might getting low benefit because of
+      the market issue which is the lack of the frequent used users, since not a huge amount of people would like to
+      using a quiz website, even though for people who want to use the quiz website, it is hard to provide that they
+      would have the motivation to keep using it. </p>
+
+      <div class="img">
+        <img src="Images/timetable.JPG" alt="scary"></div>
   </div>
 
 </body>

@@ -69,13 +69,24 @@ a:hover {
 text-align: center;
 }
 .project_name{
-  margin: 0px;
   padding: 10px;
   border: 10px;
   text-align: center;
   margin: 0px;
   background-color: rgba(0, 0, 0, 0.76);
   color: rgb(255, 0, 0);
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.r_t{
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-top: 40px;
+  text-align: left;
+  background-color: white;
+  padding: 30px;
 }
 
 footer{
@@ -86,6 +97,8 @@ color: white;
 
 table {
   width:50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 table, th, td {
   border: 1px solid black;
@@ -105,3 +118,4 @@ th, td {
   background-color: rgb(255, 0, 0);
   color: white;
 }
+/* Source: https://www.w3schools.com/ */
