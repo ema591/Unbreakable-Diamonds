@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Testing form</title>
+</head>
+<body>
+	<style type="text/css">
+		
+	</style>
+	<div class="content-section">
+		<form method="POST" action="">
+			{% block content %}
+			<!-- Hidden tag will add a csrf token-->
+			{{ form.hidden_tag() }}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Join Today</legend>
+				<div class="form-group">
+					{{ form.username.label(class="form-control-label") }}
+					{{ form.username(class="form-control form-control-lg") }}
+					{{ form.email.label(class="form-control-label") }}
+					{{ form.email(class="form-control form-control-lg") }}
+					{{ form.password.label(class="form-control-label") }}
+					{{ form.password(class="form-control form-control-lg") }}
+					</div>
+			</fieldset>
+					{{ form.submit.label(class="form-control-label") }}
+					{{ form.submit(class="form-control form-control-lg") }}
+			{% endblock content %}
+		</form>
+	</div>
+</body>
+</html>
