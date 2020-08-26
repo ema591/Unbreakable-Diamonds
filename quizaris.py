@@ -9,10 +9,16 @@ app.config['SECRET_KEY'] = '23ac083317c8fd13abc6e424e9425b4f'
 
 posts = [
 	{
-		'author': 'Test',
-		'title': 'testing',
+		'author': 'Me',
+		'title': 'KAKAKAK',
 		'content': 'First question',
 		'date_posted': 'Today'
+	}, 
+	{
+		'author': 'You',
+		'title': 'NayNay',
+		'content': 'Second Questions',
+		'date_posted': 'last nmight'
 	}
 ]
 
@@ -25,7 +31,7 @@ def hello():
 def team():
 	return render_template("test.html", posts=posts)
 
-@app.route("/register")
+@app.route("/register", methods=['GET', 'POST'])
 def register():
 	form = RegistrationForm()
 	return render_template('test-form.html', title="Test", form=form)
