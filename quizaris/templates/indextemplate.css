@@ -1,0 +1,92 @@
+body {
+    display: grid;
+    grid-template-areas: "side header nav" "side main ads" "footer footer footer";
+    grid-template-rows: 80px 1fr 70px;
+    grid-template-columns: 20% 1fr 15%;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    height: 100vh;
+    margin: 0;
+}
+
+header,
+footer,
+section,
+nav,
+div {
+    padding: 1.2em;
+    background: rgb(209, 209, 209);
+}
+
+#pageHeader {
+    grid-area: header;
+}
+
+#nav {
+    grid-area: nav;
+    align-items: left;
+}
+
+ul {
+    list-style-type: none;
+}
+
+li a {
+    color: rgb(0, 0, 0);
+    text-decoration: none;
+}
+
+li a:hover:not(.active) {
+    background-color: #646464;
+}
+
+#main {
+    grid-area: main;
+    display: grid;
+    grid-template-columns: 25% 25% 25% 25%;
+    grid-template-rows: 10% 35% 35% 20%;
+}
+
+.quizzes {
+    grid-area: main;
+    display: grid;
+    grid-row: 2/3;
+    grid-column: 1/4;
+}
+
+.mainIntro {
+    grid-area: main;
+    display: grid;
+    grid-row: 1;
+    grid-column: 1/4;
+}
+
+.mainExtra {
+    grid-area: main;
+    display: grid;
+    grid-row: 4;
+    grid-column: 1/4;
+}
+
+#side {
+    grid-area: side;
+}
+
+#siteAds {
+    grid-area: ads;
+}
+
+#pageFooter {
+    grid-area: footer;
+}
+
+
+/* Stack the layout on small devices/viewports. */
+
+@media all and (max-width: 575px) {
+    body {
+        grid-template-areas: "header" "article" "ads" "nav" "footer";
+        grid-template-rows: 80px 1fr 70px 1fr 70px;
+        grid-template-columns: 1fr;
+    }
+}
