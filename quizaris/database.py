@@ -1,5 +1,16 @@
-# Import the db instance from the __init__.py file.
-from quizaris import db
+"""
+-----------------------------------------------------------------------------------------
+| This file will contain all the database tables/models which will be used to store data|
+-----------------------------------------------------------------------------------------
+"""
+
+"""
+TODO:
+Add another class which will store the users quiz data. TBD what kind of data we are storing. 
+"""
+
+# Import the db instance and the login manager instance from the __init__.py file.
+from quizaris import db #, login_manager
 
 # The table name will be `user` - lowercase
 class User(db.Model):
@@ -33,8 +44,4 @@ class Question(db.Model):
 	# Way the data is displayed when looking at the object
 	def __repr__(self):
 		return f"Question('{self._id}, {self.question}, {self.answer}')"
-
-# class Progress(db.Model):
-# 	solver = db.relationship('User')
-# 	questions_solved = db.relationship('Question', 'solved_by')
 
