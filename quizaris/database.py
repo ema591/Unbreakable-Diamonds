@@ -1,9 +1,5 @@
-from flask import Flask
-from flask_sqlalchemy import SQLAlchemy
-
-app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///quizaris.db'
-db = SQLAlchemy(app)
+# Import the db instance from the __init__.py file.
+from quizaris import db
 
 # The table name will be `user` - lowercase
 class User(db.Model):
