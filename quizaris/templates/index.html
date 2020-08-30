@@ -5,13 +5,17 @@
     <title>SectionC</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="indextemplate.css">
+    <link rel="stylesheet" type="text/css" href="/static/style.css">
     <!--Google fonts link -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="Images/logo.ico" type="image/x-icon" />
+    <link rel="shortcut icon" href="/static/images/logo.ico" type="image/x-icon" />
 </head>
 
 <body>
+
+    {% block content %}
+    {% endblock content %}
+
     <header id="pageHeader">Quizzaris</header>
 
     <nav id="nav">
@@ -25,10 +29,10 @@
     <section id="main">
         <h3 class="mainIntro">Quizzes</h3>
         <section class="quizzes">
-            <a href="/Images/logo.png">Quiz 1</a>
-            <a href="/Images/logo.png">Quiz 2</a>
-            <a href="/Images/logo.png">Quiz 3</a>
-            <a href="/Images/logo.png">Quiz 4</a>
+            <a href="/static/images/logo.png">Quiz 1</a>
+            <a href="/static/images/logo.png">Quiz 2</a>
+            <a href="/static/images/logo.png">Quiz 3</a>
+            <a href="/static/images/logo.png">Quiz 4</a>
         </section>
 
         <section class="mainExtra">
@@ -42,3 +46,4 @@
 
     <footer id="pageFooter">Footer</footer>
 </body>
+</html>

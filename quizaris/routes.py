@@ -9,19 +9,23 @@ from quizaris import app, db, bcrypt
 from quizaris.database import User, Question
 # Only import the relevant stuff for this file.
 from flask import render_template, url_for, flash, redirect
-# import the forms 
+# import the forms 	
 from quizaris.forms import RegistrationForm, LoginForm
 
 # The following routes are used to route the users to the intended locations
 @app.route("/")
 def home():
-	return "<h1>Index page<h1>"
+	
+	return '<h1>Hello</h1>'
+@app.route("/test")
+def test():
+	return render_template('index.html')
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
 	form = LoginForm()
 	if form.validate_on_submit():
-		username = form.username.data
+		# username = form.username.data
 
 		flash('Login successful')
 	return render_template("login.html", title="Login",  form=form)
