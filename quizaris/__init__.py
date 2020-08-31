@@ -24,7 +24,7 @@ db = SQLAlchemy(app)
 # Initialize bcrypt.
 bcrypt = Bcrypt(app)
 # Create a LoginManager instance for the application.
-# login_manager = LoginManager(app)
+login_manager = LoginManager(app)
 
 # Import the routes 
 from quizaris import routes 
