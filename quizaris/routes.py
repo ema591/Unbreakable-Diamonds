@@ -13,7 +13,7 @@ from flask import render_template, url_for, flash, redirect
 # import the forms 	
 from quizaris.forms import RegistrationForm, LoginForm
 # Import the login function from the database file
-from quizaris.database import login_user, current_user, logout_user
+from quizaris.database import login_user, current_user, logout_user, login_required
 # The following routes are used to route the users to the intended locations
 @app.route("/")
 def home():
@@ -72,3 +72,8 @@ def register():
 @app.route("/logout")
 def logout():
 	logout_user()
+
+@app.route("/account")
+@login_required
+def account():
+	return "<h1>Hello</h1>"
