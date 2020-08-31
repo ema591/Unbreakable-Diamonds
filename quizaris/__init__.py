@@ -9,7 +9,7 @@ from flask_sqlalchemy import SQLAlchemy
 # The following library will allow us to set a password hash.
 from flask_bcrypt import Bcrypt
 # Import the flask login manager which will be used to handle Logins
-# from flask_login import LoginManager
+from flask_login import LoginManager
 
 # Configurations 
 

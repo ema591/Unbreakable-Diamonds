@@ -3,6 +3,7 @@
 | This file will contain all the routes|
 ----------------------------------------
 """
+
 # Import the app 
 from quizaris import app, db, bcrypt
 # Import the database models/tables from the database.py file. 
@@ -11,7 +12,8 @@ from quizaris.database import User, Question
 from flask import render_template, url_for, flash, redirect
 # import the forms 	
 from quizaris.forms import RegistrationForm, LoginForm
-
+# Import the login function from the database file
+from quizaris.database import login_user, current_user, logout_user
 # The following routes are used to route the users to the intended locations
 @app.route("/")
 def home():
@@ -23,15 +25,33 @@ def test():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
+	
+	if current_user.is_authenticated:
+		return(url_for('home'))
+
 	form = LoginForm()
 	if form.validate_on_submit():
-		# username = form.username.data
-
-		flash('Login successful')
+		email = form.email.data
+		password = form.password.data
+		remember_me = form.remember_me.data
+		# The user variable will store the data returned by the query that if a user exists will return a value, else it will return none
+		user = User.query.filter_by(email=email)
+		# Check if the users data matches with the data returned in the above query
+		if user and bcrypt.check_password_hash(user.password, password):
+			# The following function call will log the user in and create a session for them.
+			login_user(user, remember_me)
+			return redirect(url_for('home'))
+		else:
+			flash('Login Unsuccessful please check your email or password')
+	
 	return render_template("login.html", title="Login",  form=form)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
+
+	if current_user.is_authenticated:
+		return(url_for('home'))
+
 	form = RegistrationForm()
 	if form.validate_on_submit():
 		username = form.username.data
@@ -48,3 +68,7 @@ def register():
 		# Redirect to the url of the home() function
 		return redirect("/login")
 	return render_template('register.html', title="Register", form=form)
+
+@app.route("/logout")
+def logout():
+	logout_user()

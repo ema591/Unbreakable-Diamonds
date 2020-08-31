@@ -5,7 +5,7 @@
 """
 # Flask forms will be used to make forms for submissions
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from quizaris.database import User
 
@@ -21,7 +21,7 @@ class RegistrationForm(FlaskForm):
 		# If the username exists this user = True if not it will be None 
 		user  = User.query.filter_by(username=username.data).first()
 		if user:
-			# Validation error is built in to the wtforms.validators library
+			# Validation error is built in to the wtforms.validators library and will be returned as a form error.
 			raise ValidationError('The username already exists! Please pick a different username!')
 
 	def validate_email(self, email):
@@ -32,4 +32,5 @@ class RegistrationForm(FlaskForm):
 class LoginForm(FlaskForm):
 	email = StringField('Email', validators=[DataRequired(), Email()])
 	password = PasswordField('Password', validators=[DataRequired()])
+	remember_me = BooleanField('Remember Me')
 	submit = SubmitField('Login')
