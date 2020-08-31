@@ -10,10 +10,18 @@ Add another class which will store the users quiz data. TBD what kind of data we
 """
 
 # Import the db instance and the login manager instance from the __init__.py file.
-from quizaris import db #, login_manager
+from quizaris import db, login_manager
+# Import UserMixin for keeping track of authenticated users.
+from flask_login import UserMixin
+
+# For the login manager we need to be able to identify a user with their ID
+@login_manager.user_loader 
+def load_user(user_id):
+	# The function will simply return the user with the user_id set to the param.
+	return User.query.get(int(user_id))
 
 # The table name will be `user` - lowercase
-class User(db.Model):
+class User(db.Model, UserMixin):
 	# Makes coloumns for the user data.
 	_id = db.Column(db.Integer, primary_key = True, autoincrement=True)
 	username = db.Column(db.String(30), nullable=False)
