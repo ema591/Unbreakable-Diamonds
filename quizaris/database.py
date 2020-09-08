@@ -53,3 +53,8 @@ class Question(db.Model):
 	def __repr__(self):
 		return f"Question('{self._id}, {self.question}, {self.answer}')"
 
+class RightToWrong(db.Model):
+	_id = db.column(db.Integer, primary_key=True, nullable=False)
+	username_id = db.column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	right_answers = db.column(db.Integer, nullable=False)
+	wrong_answers = db.column(db.Integer, nullable=False)
