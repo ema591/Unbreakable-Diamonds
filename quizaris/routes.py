@@ -25,7 +25,6 @@ def test():
 
 @app.route("/login", methods=['GET', 'POST'])
 def login():
-	
 	if current_user.is_authenticated:
 		return(url_for('home'))
 
