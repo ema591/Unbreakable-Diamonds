@@ -54,7 +54,7 @@ class Question(db.Model):
 		return f"Question('{self._id}, {self.question}, {self.answer}')"
 
 class RightToWrong(db.Model):
-	_id = db.Column(db.Integer, primary_key=True, autoincrement=True,nullable=False)
+	_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
 	username_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 	right_answers = db.Column(db.Integer, nullable=False)
 	wrong_answers = db.Column(db.Integer, nullable=False)
