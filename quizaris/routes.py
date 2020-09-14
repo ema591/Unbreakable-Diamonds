@@ -42,7 +42,7 @@ def login():
 			return redirect(url_for('home'))
 		else:
 			flash('Login Unsuccessful please check your email or password')
-	
+	# The form variable is passed in to the form for jinja being able to access it.
 	return render_template("login.html", title="Login",  form=form)
 
 @app.route("/register", methods=['GET', 'POST'])
@@ -68,6 +68,30 @@ def register():
 		return redirect("/login")
 	return render_template('register.html', title="Register", form=form)
 
+@app.route("/questions")
+@login_required
+def questions():
+	form = AddQuestion()
+	if form.validate_on_submit():
+		# collect all the data from the form.
+		question = form.question.data
+		answer = form.answer.data
+		option_a = form.option_a.data
+		option_b = form.option_b.data
+		option_c = form.option_c.data
+		option_d = form.option_d.data
+		category = form.category.data
+		difficulty = form.difficulty.data
+		add_question = AddQuestion(question=question, answer=answer, option_d=option_d, option_c=option_c, option_b=option_b, option_a=option_a, difficulty=difficulty)
+return render_template("questions.html", title="Add Questions", form=form)
+
+# The following function will route to quizzes and allow the user to interact with the quizzes.
+@app.route("/quizzes")
+@login_required
+def quizzes():
+	form = ChooseTypeQuiz()
+	return validate_on_submit('quizzes.html', title='Quizzes', form=form)
+
 @app.route("/logout")
 def logout():
 	logout_user()
@@ -76,3 +100,4 @@ def logout():
 @login_required
 def account():
 	return "<h1>Hello</h1>"
+
