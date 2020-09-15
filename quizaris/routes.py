@@ -17,8 +17,8 @@ from flask_login import login_user, current_user, logout_user, login_required
 # The following routes are used to route the users to the intended locations
 @app.route("/")
 def home():
-	
-	return '<h1>Hello</h1>'
+	return ''
+
 @app.route("/test")
 def test():
 	return render_template('index.html')
@@ -43,14 +43,13 @@ def login():
 		else:
 			flash('Login Unsuccessful please check your email or password')
 	# The form variable is passed in to the form for jinja being able to access it.
+	# The variables passed in are form, and title which will be used with jinja
 	return render_template("login.html", title="Login",  form=form)
 
 @app.route("/register", methods=['GET', 'POST'])
 def register():
-
 	if current_user.is_authenticated:
 		return(url_for('home'))
-
 	form = RegistrationForm()
 	if form.validate_on_submit():
 		username = form.username.data
@@ -83,7 +82,7 @@ def questions():
 		category = form.category.data
 		difficulty = form.difficulty.data
 		add_question = AddQuestion(question=question, answer=answer, option_d=option_d, option_c=option_c, option_b=option_b, option_a=option_a, difficulty=difficulty)
-return render_template("questions.html", title="Add Questions", form=form)
+	return render_template("questions.html", title="Add Questions", form=form)
 
 # The following function will route to quizzes and allow the user to interact with the quizzes.
 @app.route("/quizzes")
@@ -99,5 +98,5 @@ def logout():
 @app.route("/account")
 @login_required
 def account():
-	return "<h1>Hello</h1>"
+	return ""
 

@@ -5,8 +5,8 @@
 """
 # Flask forms will be used to make forms for submissions
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, SubmitField, BooleanField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, DecimalField, SelectField, RadioField
+from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, RadioField
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from quizaris.database import User
 
 class RegistrationForm(FlaskForm):
@@ -41,7 +41,7 @@ class AddQuestion(FlaskForm):
 	option_b = StringField('Option B', validators=[DataRequired()])
 	option_c = StringField('Option C')
 	option_d = StringField('Option D')
-	answer = DecimalField('Answer (1, 2, 3, or 4)', validators=[DataRequired()])
+	answer = IntegerField('Answer (1, 2, 3, or 4)', validators=[DataRequired()])
 	category = SelectField('Category', choices=[('science', 'Science'), ('maths', 'Maths'), ('english', 'English')])
 	difficulty = SelectField('Difficulty', choices=[('easy', 'Easy'), ('intermediate', 'Intermediate'), ('hard', 'Hard')])
 	submit = SubmitField('Submit Question')
@@ -52,6 +52,11 @@ class ChooseTypeQuiz(FlaskForm):
 	difficulty = SelectField('Difficulty', choices=[('easy', 'Easy'), ('intermediate', 'Intermediate'), ('hard', 'Hard')])
 	submit = SubmitField('Choose quiz')
 
-class SolveQuiz(FlaskForm, option_a, option_b, option_c, option_d):
-	options = RadioField('Options', choices=[('1', option_a), ('2', option_b), ('3', option_c), ('4', option_d)])
-	submit = SubmitField('Submit Answer')
+
+# pass in keyword args (kwargs) with a key value pair like a dictonary
+class SolveQuiz(FlaskForm):
+	def __init__(self, **kwargs):
+		options = RadioField('Options', choices=[('1', kwargs['option_a']), ('2', kwargs['option_b']), ('3', kwargs['option_c']), ('4', kwargs['option_d'])])
+		submit = SubmitField('Submit Answer')
+
+

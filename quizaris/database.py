@@ -30,6 +30,7 @@ class User(db.Model, UserMixin):
 	# adding a relationship between the User and any questions that they make.
 	# This question exists here because of the cardinality of the relationship i.e. 1 user can make multiple questions but a question can only have 1 author
 	question = db.relationship('Question', backref='author', lazy=True) # Lazy true means that sqlalchemy will load all the data in one go 
+	
 	# Way the data is displayed when looking at the object
 	def __repr__(self):
 		return f"User('{self._id}', '{self.username}', '{self.email}')"
@@ -55,6 +56,8 @@ class Question(db.Model):
 
 class RightToWrong(db.Model):
 	_id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
-	username_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+	username_id = db.Column(db.Integer, db.ForeignKey('user._id'), nullable=False)
 	right_answers = db.Column(db.Integer, nullable=False)
 	wrong_answers = db.Column(db.Integer, nullable=False)
+	# Store the questions solved in a string array which can be split to view the contents, the value stored will be the id of the questions.
+	questions_solved = db.Column(db.String)
