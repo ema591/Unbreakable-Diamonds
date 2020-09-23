@@ -11,7 +11,7 @@ from quizaris.database import User, Question
 # Only import the relevant stuff for this file.
 from flask import render_template, url_for, flash, redirect
 # import the forms 	
-from quizaris.forms import RegistrationForm, LoginForm, ChooseTypeQuiz, AddQuestion
+from quizaris.forms import RegistrationForm, LoginForm, ChooseTypeQuiz, AddQuestion, Search
 # Import the login function from the database file
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -19,11 +19,6 @@ from flask_login import login_user, current_user, logout_user, login_required
 # The following routes are used to route the users to the intended locations
 @app.route("/")
 def home():
-    return ''
-
-
-@app.route("/test")
-def test():
     return render_template('index.html')
 
 
@@ -39,11 +34,11 @@ def login():
         remember_me = form.remember_me.data
         # The user variable will store the data returned by the query that if a user exists will return a value,
         # else it will return none
-        user = User.query.filter_by(email=email)
+        user = User.query.filter_by(email=email).first()
         # Check if the users data matches with the data returned in the above query
         if user and bcrypt.check_password_hash(user.password, password):
             # The following function call will log the user in and create a session for them.
-            login_user(user, remember_me)
+            login_user(user, False)
             return redirect(url_for('home'))
         else:
             flash('Login Unsuccessful please check your email or password')
@@ -74,7 +69,7 @@ def register():
     return render_template('register.html', title="Register", form=form)
 
 
-@app.route("/questions")
+@app.route("/questions", methods=['GET', 'POST'])
 @login_required
 def questions():
     form = AddQuestion()
@@ -88,25 +83,30 @@ def questions():
         option_d = form.option_d.data
         category = form.category.data
         difficulty = form.difficulty.data
-        add_question = AddQuestion(question=question, answer=answer, option_d=option_d, option_c=option_c,
-                                   option_b=option_b, option_a=option_a, difficulty=difficulty)
+        add_question = Question(question=question, answer=answer, option_d=option_d, option_c=option_c,
+                                   option_b=option_b, option_a=option_a, difficulty=difficulty, category=category)
     return render_template("questions.html", title="Add Questions", form=form)
 
 
 # The following function will route to quizzes and allow the user to interact with the quizzes.
-@app.route("/quizzes")
+@app.route("/quizzes", methods=['GET', 'POST'])
 @login_required
 def quizzes():
+    # A search form which will be used to look for forms.
+    search_form = Search()
     form = ChooseTypeQuiz()
-    return render_template('quizzes.html', title='Quizzes', form=form)
+    # The variables form, title and search_form are passed in to the template. The forms fields can be found in the forms.py file.
+    return render_template('quizzes.html', title='Quizzes', form=form, search_form=search_form)
 
 
 @app.route("/logout")
+@login_required
 def logout():
     logout_user()
+    return redirect(url_for("home"))
 
 
-@app.route("/account")
+@app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    return ""
+    return render_template('account.html', username=current_user.username, email=current_user.email)
