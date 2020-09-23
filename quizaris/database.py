@@ -29,8 +29,8 @@ class User(db.Model, UserMixin):
     username = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(50), nullable=False)
     password = db.Column(db.String(60), nullable=False)
-    # adding a relationship between the User and any questions that they make.
-    # This question exists here because of the cardinality of the relationship i.e. 1 user can make multiple questions but a question can only have 1 author
+    # adding a relationship between the User and any questions that they make. This question exists here because of
+    # the cardinality of the relationship i.e. 1 user can make multiple questions but a question can only have 1 author
     quiz = db.relationship('Quiz', backref='author',
                            lazy=True)  # Lazy true means that sqlalchemy will load all the data in one go
 
@@ -62,13 +62,10 @@ class Question(db.Model):
         return f"Question('{self._id}, {self.question}, {self.answer}')"
 
 
-class RightToWrong(db.Model):
+class Improvement(db.Model):
     _id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     username_id = db.Column(db.Integer, db.ForeignKey('user._id'), nullable=False)
-    right_answers = db.Column(db.Integer, nullable=False)
-    wrong_answers = db.Column(db.Integer, nullable=False)
-    # Store the questions solved in a string array which can be split to view the contents, the value stored will be the id of the questions.
-    questions_solved = db.Column(db.String)
+    quizzes_done = db.relationship('Quiz', backref='quizzes_done')
 
 
 class Quiz(db.Model):
@@ -76,6 +73,21 @@ class Quiz(db.Model):
     # One quiz can have multiple questions
     questions = db.relationship('Question', backref='quiz_questions', lazy=True)
     quizname = db.Column(db.String(100))
+    comments = db.relationship('Comments', backref='comments',
+                               lazy=True)  # Lazy true means that sqlalchemy will load all the data in one go
+    rate = db.relationship('Rating', backref='rate', lazy=True)
 
     def __repr__(self):
         return f"Quiz('{self.quizname}')"
+
+
+class Comments(db.Model):
+    _id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    # Comments themselves
+    comment = db.Column(db.String(200))
+
+
+class Rating(db.Model):
+    _id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
+    # Rating will be calculated out of five and thus will be stored as an integer.
+    rate = db.Column(db.Integer)

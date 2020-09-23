@@ -98,7 +98,7 @@ def questions():
 @login_required
 def quizzes():
     form = ChooseTypeQuiz()
-    return validate_on_submit('quizzes.html', title='Quizzes', form=form)
+    return render_template('quizzes.html', title='Quizzes', form=form)
 
 
 @app.route("/logout")
