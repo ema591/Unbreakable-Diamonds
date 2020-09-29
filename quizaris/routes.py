@@ -73,6 +73,7 @@ def register():
 @login_required
 def questions():
     form = AddQuestion()
+
     if form.validate_on_submit():
         # collect all the data from the form.
         question = form.question.data
@@ -84,7 +85,8 @@ def questions():
         category = form.category.data
         difficulty = form.difficulty.data
         add_question = Question(question=question, answer=answer, option_d=option_d, option_c=option_c,
-                                   option_b=option_b, option_a=option_a, difficulty=difficulty, category=category)
+                                option_b=option_b, option_a=option_a, difficulty=difficulty, category=category)
+
     return render_template("questions.html", title="Add Questions", form=form)
 
 
@@ -94,9 +96,10 @@ def questions():
 def quizzes():
     # A search form which will be used to look for forms.
     search_form = Search()
-    form = ChooseTypeQuiz()
-    # The variables form, title and search_form are passed in to the template. The forms fields can be found in the forms.py file.
-    return render_template('quizzes.html', title='Quizzes', form=form, search_form=search_form)
+    choose_type_form = ChooseTypeQuiz()
+    # The variables form, title and search_form are passed in to the template. The forms fields can be found in the
+    # forms.py file.
+    return render_template('quizzes.html', title='Quizzes', choose_type_form=choose_type_form, search_form=search_form)
 
 
 @app.route("/logout")

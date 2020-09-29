@@ -57,6 +57,7 @@ class Question(db.Model):
     # The following column will contain the foreign key containing the id of the user who created the question.
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
+
     # Way the data is displayed when looking at the object
     def __repr__(self):
         return f"Question('{self.id}, {self.question}, {self.answer}')"
@@ -77,7 +78,7 @@ class Quiz(db.Model):
                                lazy=True)  # Lazy true means that sqlalchemy will load all the data in one go
     rate = db.relationship('Rating', backref='rate', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-
+    difficulty = db.Column(db.String(10), )
     def __repr__(self):
         return f"Quiz('{self.quizname}')"
 
@@ -88,8 +89,10 @@ class Comments(db.Model):
     comment = db.Column(db.String(200))
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
 
+
 class Rating(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     # Rating will be calculated out of five and thus will be stored as an integer.
     user_rating = db.Column(db.Integer)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
+

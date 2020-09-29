@@ -77,3 +77,4 @@ class SolveQuiz(FlaskForm):
 class Search(FlaskForm):
     search = StringField('Search', render_kw={"placeholder": "search field"})
 
+
