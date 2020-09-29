@@ -7,7 +7,7 @@
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, RadioField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
-from quizaris.database import User
+from quizaris.database import *
 
 
 class RegistrationForm(FlaskForm):
@@ -49,11 +49,6 @@ class AddQuestion(FlaskForm):
     option_d = StringField('Option D', render_kw={"placeholder": "Option D"})
     answer = IntegerField('Answer', validators=[DataRequired()],
                           render_kw={"placeholder": "1 for A, 2 for B, 3 for C, 4 for D"})
-    category = SelectField('Category',
-                           choices=[('science', 'Science'), ('it', 'Information Technology'), ('maths', 'Maths'),
-                                    ('english', 'English')])
-    difficulty = SelectField('Difficulty',
-                             choices=[('easy', 'Easy'), ('intermediate', 'Intermediate'), ('hard', 'Hard')])
     submit = SubmitField('Submit Question')
 
 
@@ -68,9 +63,14 @@ class ChooseTypeQuiz(FlaskForm):
 # pass in keyword args (kwargs) with a key value pair like a dictionary
 class SolveQuiz(FlaskForm):
     def __init__(self, **kwargs):
+        self.option_a = kwargs['option_a']
+        self.option_b = kwargs['option_b']
+        self.option_c = kwargs['option_c']
+        self.option_d = kwargs['option_d']
+
         options = RadioField('Options',
-                             choices=[('1', kwargs['option_a']), ('2', kwargs['option_b']), ('3', kwargs['option_c']),
-                                      ('4', kwargs['option_d'])])
+                             choices=[('1', self.option_a), ('2', self.option_b), ('3', self.option_c),
+                                      ('4', self.option_d)])
         submit = SubmitField('Submit Answer')
 
 
@@ -78,3 +78,21 @@ class Search(FlaskForm):
     search = StringField('Search', render_kw={"placeholder": "search field"})
 
 
+class MakeQuiz(FlaskForm):
+    quizname = StringField('Quizname', validators=[DataRequired()], render_kw={"placeholder": "Quiz name here"})
+    category = SelectField('Category',
+                           choices=[('science', 'Science'), ('it', 'Information Technology'), ('maths', 'Maths'),
+                                    ('english', 'English')])
+    difficulty = SelectField('Difficulty',
+                             choices=[('easy', 'Easy'), ('intermediate', 'Intermediate'), ('hard', 'Hard')])
+    submit = SubmitField('Make Quiz')
+
+
+class SelectWhatQuiz(FlaskForm):
+    def __init__(self, **kwargs):
+        self.choices_list = []
+        for i in kwargs.items():
+            # Flip the values of the tuple around to work with the FlaskForm.
+            self.choices_list.append((i[1], i[0]))
+        select_box_quizzes = RadioField('Select Quiz', choices=self.choices_list)
+        submit = SubmitField('Select this quiz')
