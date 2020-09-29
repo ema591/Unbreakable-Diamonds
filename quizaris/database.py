@@ -50,33 +50,35 @@ class Question(db.Model):
     option_d = db.Column(db.String(150), nullable=True)
     # The answer will be stored as an integer 1-4 and each will correspond to an option.
     answer = db.Column(db.Integer, nullable=False)
-    # Category of the questions will be stored here
-    category = db.Column(db.String(30), nullable=False)
     solution_explanation = db.Column(db.String(250),
-                                     default="The author has not added an explanantion for the solution")
+                                     default="The author has not added an explanation for the solution")
     # The following column will contain the foreign key containing the id of the user who created the question.
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
+
     # Way the data is displayed when looking at the object
     def __repr__(self):
         return f"Question('{self.id}, {self.question}, {self.answer}')"
 
 
-class Improvement(db.Model):
+class CompletedQuizzes(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     quizzes_done = db.Column(db.String(200))
-
+    quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
 
 class Quiz(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     # One quiz can have multiple questions
     questions = db.relationship('Question', backref='quiz_questions', lazy=True)
-    quizname = db.Column(db.String(100))
+    quizname = db.Column(db.String(100), nullable=False)
     comments = db.relationship('Comments', backref='comments',
                                lazy=True)  # Lazy true means that sqlalchemy will load all the data in one go
     rate = db.relationship('Rating', backref='rate', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    difficulty = db.Column(db.String(10), nullable=False)
+    # Category of the questions will be stored here
+    category = db.Column(db.String(30), nullable=False)
 
     def __repr__(self):
         return f"Quiz('{self.quizname}')"
@@ -87,9 +89,11 @@ class Comments(db.Model):
     # Comments themselves
     comment = db.Column(db.String(200))
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
 
 class Rating(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     # Rating will be calculated out of five and thus will be stored as an integer.
     user_rating = db.Column(db.Integer)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

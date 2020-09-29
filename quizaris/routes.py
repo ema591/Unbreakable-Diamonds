@@ -11,7 +11,7 @@ from quizaris.database import User, Question
 # Only import the relevant stuff for this file.
 from flask import render_template, url_for, flash, redirect
 # import the forms 	
-from quizaris.forms import RegistrationForm, LoginForm, ChooseTypeQuiz, AddQuestion, Search
+from quizaris.forms import *
 # Import the login function from the database file
 from flask_login import login_user, current_user, logout_user, login_required
 
@@ -72,31 +72,64 @@ def register():
 @app.route("/questions", methods=['GET', 'POST'])
 @login_required
 def questions():
-    form = AddQuestion()
-    if form.validate_on_submit():
-        # collect all the data from the form.
-        question = form.question.data
-        answer = form.answer.data
-        option_a = form.option_a.data
-        option_b = form.option_b.data
-        option_c = form.option_c.data
-        option_d = form.option_d.data
-        category = form.category.data
-        difficulty = form.difficulty.data
-        add_question = Question(question=question, answer=answer, option_d=option_d, option_c=option_c,
-                                   option_b=option_b, option_a=option_a, difficulty=difficulty, category=category)
-    return render_template("questions.html", title="Add Questions", form=form)
+    # Forms is an array that will contain all the Add question form instances.
+    # Use the index while accessing these with jinja
+    add_question_forms = []
+    for i in range(10):
+        add_question_forms[i] = AddQuestion()
+    # MakeQuiz instance
+    quiz_form = MakeQuiz()
+    # Keeps count of the valid questions.
+    valid_questions = 0
+    for i in range(10):
+        if add_question_forms[i].validate_on_submit():
+            add_question = Question(question=add_question_forms[i].question, option_a=add_question_forms[i].option_a,
+                                    option_b=add_question_forms[i].option_b, option_c=add_question_forms[i].option_c,
+                                    option_d=add_question_forms[i].option_d)
+            db.session.add(add_question)
+            db.session.commit()
+            valid_questions += 1
+    # Check if the questions submitted are more than 5
+    if valid_questions > 5 and quiz_form.validate_on_submit():
+        author = User.query.filter_by(email=current_user.email).first()
+        add_quiz = Quiz(quizname=quiz_form.quizname.data, category=quiz_form.category.data,
+                        difficulty=quiz_form.difficulty.data, user_id=author.id)
+        db.session.add(add_quiz)
+        db.session.commit()
+
+    # The forms variable is an array that contains 10 instances of the AddQuestion form.
+    return render_template("questions.html", title="Add Questions", forms=add_question_forms, quiz_form=quiz_form)
 
 
-# The following function will route to quizzes and allow the user to interact with the quizzes.
+# The following function will route to quizzes and allow the user to view the quizzes.
 @app.route("/quizzes", methods=['GET', 'POST'])
 @login_required
 def quizzes():
     # A search form which will be used to look for forms.
     search_form = Search()
-    form = ChooseTypeQuiz()
-    # The variables form, title and search_form are passed in to the template. The forms fields can be found in the forms.py file.
-    return render_template('quizzes.html', title='Quizzes', form=form, search_form=search_form)
+    choose_quiz_type_form = ChooseTypeQuiz()
+    select_quiz_to_do = SelectWhatQuiz()
+    if choose_quiz_type_form.validate_on_submit():
+        if choose_quiz_type_form.category:
+            # This will be an array of questions so use a for loop in jinja
+            possible_quizzes = Quiz.query.filter_by(category=choose_quiz_type_form.category).all()
+        elif choose_quiz_type_form.difficulty:
+            # This will be an array of questions so use a for loop in jinja
+            possible_quizzes = Quiz.query.filter_by(category=choose_quiz_type_form.category, difficulty=choose_quiz_type_form.difficulty).all()
+        elif choose_quiz_type_form.difficulty and choose_quiz_type_form.category:
+            # This will be an array of questions so use a for loop in jinja
+            possible_quizzes = Quiz.query.filter_by(category=choose_quiz_type_form.category, difficulty=choose_quiz_type_form.difficulty).all()
+    else:
+        # This will be an array of questions so use a for loop in jinja
+        # If no filters have been applied all the Quizzes are returned
+        possible_quizzes = Quiz.query.all()
+    if select_quiz_to_do.validate_on_submit():
+        # Call the function quiz which would do the quiz for us.
+        return redirect(url_for('quiz', quiz_id=select_quiz_to_do.select_box_quizzes.data))
+    # The variables form, title and search_form are passed in to the template. The forms fields can be found in the
+    # forms.py file.
+    # List all the possible quizzes using a radio
+    return render_template('quizzes.html', title='Quizzes', choose_quiz_type_form=choose_quiz_type_form, possible_quizzes=possible_quizzes, search_form=search_form)
 
 
 @app.route("/logout")
@@ -105,8 +138,21 @@ def logout():
     logout_user()
     return redirect(url_for("home"))
 
+# The following function will be used to do the quiz themself.
+@app.route("/quiz/<quiz_id>")
+@login_required
+def quiz(quiz_id):
+    # current_quiz = Quiz.query.filter_by(id=quiz_id).first()
+    # This will be an array of questions so use a for loop in jinja
+    # the_questions = Question.query.filter_by(quiz_id=quiz_id).all()
+    # solve_quiz = SolveQuiz()
+    # if solve_quiz.validate_on_submit():
+    #     selected_answer =
+    return render_template('quiz.html', the_questions=the_questions)
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
-    return render_template('account.html', username=current_user.username, email=current_user.email)
+    current_users_data = User.query.filter_by(email=current_user.email).first()
+    quizzes_done = CompletedQuizzes.query.filter_by(user_id=current_users_data.id)
+    return render_template('account.html', username=current_user.username, email=current_user.email, quizzes_done=quizzes_done)
