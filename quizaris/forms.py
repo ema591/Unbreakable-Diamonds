@@ -61,7 +61,7 @@ class ChooseTypeQuiz(FlaskForm):
 
 
 # pass in keyword args (kwargs) with a key value pair like a dictionary
-class SolveQuiz(FlaskForm):
+class SolveQuestion(FlaskForm):
     def __init__(self, **kwargs):
         self.option_a = kwargs['option_a']
         self.option_b = kwargs['option_b']
@@ -71,8 +71,9 @@ class SolveQuiz(FlaskForm):
         options = RadioField('Options',
                              choices=[('1', self.option_a), ('2', self.option_b), ('3', self.option_c),
                                       ('4', self.option_d)])
-        submit = SubmitField('Submit Answer')
 
+class SubmitQuiz(FlaskForm):
+    submit = SubmitField('Submit Quiz')
 
 class Search(FlaskForm):
     search = StringField('Search', render_kw={"placeholder": "search field"})
