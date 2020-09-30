@@ -69,9 +69,9 @@ def register():
     return render_template('register.html', title="Register", form=form)
 
 
-@app.route("/questions", methods=['GET', 'POST'])
+@app.route("/addquestions", methods=['GET', 'POST'])
 @login_required
-def questions():
+def addquestions():
     # Forms is an array that will contain all the Add question form instances.
     # Use the index while accessing these with jinja
     add_question_forms = []
@@ -82,7 +82,7 @@ def questions():
     # Keeps count of the valid questions.
     valid_questions = 0
     for i in range(10):
-        if add_question_forms[i].validate_on_submit():
+        if add_question_forms[i].validate():
             add_question = Question(question=add_question_forms[i].question, option_a=add_question_forms[i].option_a,
                                     option_b=add_question_forms[i].option_b, option_c=add_question_forms[i].option_c,
                                     option_d=add_question_forms[i].option_d)
@@ -142,13 +142,30 @@ def logout():
 @app.route("/quiz/<quiz_id>")
 @login_required
 def quiz(quiz_id):
-    # current_quiz = Quiz.query.filter_by(id=quiz_id).first()
+    # This will return an array of questions that have the quiz_id of the current quiz
+    current_quiz_questions = Question.query.filter_by(id=quiz_id).all()
+    # These are the variables set which should be displayed at the end.
+    correct_answers = 0
+    wrong_answers = 0
     # This will be an array of questions so use a for loop in jinja
-    # the_questions = Question.query.filter_by(quiz_id=quiz_id).all()
-    # solve_quiz = SolveQuiz()
-    # if solve_quiz.validate_on_submit():
-    #     selected_answer =
-    return render_template('quiz.html', the_questions=the_questions)
+    submit_quiz = SubmitQuiz()
+    solve_question_array = []
+    for i in current_quiz_questions:
+        solve_question_array.append(i)
+    if submit_quiz.validate_on_submit():
+        for i in range(10):
+            # The following try will avoid any index out of bounds errors
+            try:
+                if solve_question_array[i].validate():
+                    if solve_question_array[i].options.data == current_quiz_questions[i].answer:
+                        correct_answers += 1
+                    else:
+                        wrong_answers += 1
+            except:
+                pass
+
+    # Solve questions array is a an array that will contain all the form objects, so, like before use index's to get the form labels and input fields.
+    return render_template('quiz.html', current_quiz_questions=solve_question_array, correct_answers=correct_answers, wrong_answers=wrong_answers)
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
