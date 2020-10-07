@@ -1,22 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Create question</title>
-</head>
-<body>
-    <div class="form-group">
-        {{ form.question.label(class="") }}
-        {{ form.question.data(class="") }}
-        {{ form.answer.label(class="") }}
-        {{ form.answer.data(class="") }}
+{% extends 'wireframe/addQuestiontemplate.html' %}
+
+{%block body%}
+<div class="container">
+    <div class="jumbotron">
+      <h1>Create a quiz</h1>      
+      <p>Test your knowledge and be the best</p>
     </div>
-</fieldset>
-{{ form.submit.label(class="") }}
-{{ form.submit(class="") }}
-{% endblock content %}
-</form>
-</body>
 
-</html>
-
+{%endblock%}
