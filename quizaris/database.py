@@ -24,7 +24,7 @@ def load_user(user_id):
 
 # The table name will be `user` - lowercase
 class User(db.Model, UserMixin):
-    # Makes coloumns for the user data.
+    # Makes columns for the user data.
     id = db.Column(db.Integer, primary_key=True, autoincrement=True)
     username = db.Column(db.String(30), nullable=False)
     email = db.Column(db.String(50), nullable=False)

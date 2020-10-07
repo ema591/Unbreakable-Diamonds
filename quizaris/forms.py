@@ -54,7 +54,7 @@ class AddQuestion(FlaskForm):
 
 # The following form will be used by the users to choose the type of quiz that they want to do.
 class ChooseTypeQuiz(FlaskForm):
-    category = SelectField('Category', choices=[('science', 'Science'), ('maths', 'Maths'), ('english', 'English')])
+    category = SelectField('Category', choices=[('science', 'Science'), ('maths', 'Maths'), ('english', 'English'), ('business', 'Business')])
     difficulty = SelectField('Difficulty',
                              choices=[('easy', 'Easy'), ('intermediate', 'Intermediate'), ('hard', 'Hard')])
     submit = SubmitField('Choose quiz')
@@ -83,7 +83,7 @@ class MakeQuiz(FlaskForm):
     quizname = StringField('Quizname', validators=[DataRequired()], render_kw={"placeholder": "Quiz name here"})
     category = SelectField('Category',
                            choices=[('science', 'Science'), ('it', 'Information Technology'), ('maths', 'Maths'),
-                                    ('english', 'English')])
+                                    ('english', 'English'), ('business', 'Business')])
     difficulty = SelectField('Difficulty',
                              choices=[('easy', 'Easy'), ('intermediate', 'Intermediate'), ('hard', 'Hard')])
     submit = SubmitField('Make Quiz')

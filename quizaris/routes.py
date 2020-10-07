@@ -69,9 +69,9 @@ def register():
     return render_template('register.html', title="Register", form=form)
 
 
-@app.route("/addquestions", methods=['GET', 'POST'])
+@app.route("/addquiz", methods=['GET', 'POST'])
 @login_required
-def addquestions():
+def addquiz():
     # Forms is an array that will contain all the Add question form instances.
     # Use the index while accessing these with jinja
     add_question_forms = []
@@ -98,7 +98,7 @@ def addquestions():
         db.session.commit()
 
     # The forms variable is an array that contains 10 instances of the AddQuestion form.
-    return render_template("questions.html", title="Add Questions", forms=add_question_forms, quiz_form=quiz_form)
+    return render_template("addquiz.html", title="Add Questions", forms=add_question_forms, quiz_form=quiz_form)
 
 
 # The following function will route to quizzes and allow the user to view the quizzes.
@@ -125,10 +125,12 @@ def quizzes():
         possible_quizzes = Quiz.query.all()
     if select_quiz_to_do.validate_on_submit():
         # Call the function quiz which would do the quiz for us.
+        # The following url for will grab the data from the quiz_id/ creates a dynamic route to it and allows the user to do the quiz.
         return redirect(url_for('quiz', quiz_id=select_quiz_to_do.select_box_quizzes.data))
     # The variables form, title and search_form are passed in to the template. The forms fields can be found in the
     # forms.py file.
     # List all the possible quizzes using a radio
+    # Possible quizzes is the data RETURNED by the database. So we are looking at using possible_quizzes[i].{valuies that are in the db }
     return render_template('quizzes.html', title='Quizzes', choose_quiz_type_form=choose_quiz_type_form, possible_quizzes=possible_quizzes, search_form=search_form)
 
 
