@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html>
-
 <head>
-	<title>Testing form</title>
-	<meta charset="UTF-8">
+    <title>Testing form</title>
+    <meta charset="UTF-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 	
 	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
@@ -35,28 +34,31 @@
   </nav>
 
 <body>
-	<style type="text/css"></style>
-	<link rel="stylesheet" href="/quizaris/static/logincss.css">
-
-	<div class="container">
+	<style type="text/css">
+		
+	</style>
+	<div class="content-section">
 		<form method="POST" action="">
 			{% block content %}
 			<!-- Hidden tag will add a csrf token-->
 			{{ form.hidden_tag() }}
 			<fieldset class="form-group">
-				<legend class="border-bottom mb-4">Join Quazzaris</legend>
+				<legend class="border-bottom mb-4">Join Today</legend>
 				<div class="form-group">
+					{{ form.username.label(class="") }}
+					{{ form.username(class="") }}
 					{{ form.email.label(class="") }}
 					{{ form.email(class="") }}
 					{{ form.password.label(class="") }}
 					{{ form.password(class="") }}
-				</div>
+					{{ form.confirm_password.label(class="") }}
+					{{ form.confirm_password(class="") }}
+					</div>
 			</fieldset>
-			{{ form.submit.label(class="") }}
-			{{ form.submit(class="") }}
+					{{ form.submit.label(class="") }}
+					{{ form.submit(class="") }}
 			{% endblock content %}
 		</form>
 	</div>
 </body>
-
 </html>
