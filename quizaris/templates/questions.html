@@ -2,9 +2,21 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title></title>
+    <title>Create question</title>
 </head>
 <body>
-
+    <div class="form-group">
+        {{ form.question.label(class="") }}
+        {{ form.question.data(class="") }}
+        {{ form.answer.label(class="") }}
+        {{ form.answer.data(class="") }}
+    </div>
+</fieldset>
+{{ form.submit.label(class="") }}
+{{ form.submit(class="") }}
+{% endblock content %}
+</form>
 </body>
+
 </html>
+
