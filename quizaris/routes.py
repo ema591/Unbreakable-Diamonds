@@ -76,7 +76,7 @@ def addquiz():
     # Use the index while accessing these with jinja
     add_question_forms = []
     for i in range(10):
-        add_question_forms[i] = AddQuestion()
+        add_question_forms.append(AddQuestion())
     # MakeQuiz instance
     quiz_form = MakeQuiz()
     # Keeps count of the valid questions.
@@ -98,7 +98,7 @@ def addquiz():
         db.session.commit()
 
     # The forms variable is an array that contains 10 instances of the AddQuestion form.
-    return render_template("addquiz.html", title="Add Questions", forms=add_question_forms, quiz_form=quiz_form)
+    return render_template("addquiz.html", title="Add Questions", add_question_forms=add_question_forms, quiz_form=quiz_form)
 
 
 # The following function will route to quizzes and allow the user to view the quizzes.
