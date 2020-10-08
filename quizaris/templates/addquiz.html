@@ -1,6 +1,6 @@
 {% extends 'wireframe/addQuestiontemplate.html' %}
 
-{%block body%}
+{% block body %}
 <div class="container">
     <div class="jumbotron">
       <h1>Create a quiz</h1>      
@@ -10,28 +10,29 @@
     <form method = "POST" action = "">
        <p>What is your question</p>
         <div class = "form-group">
-            {{render_field(add_question_forms.question)}}
+            {{ add_question_forms[0].question.label }}
+            {{ add_question_forms[0].question(class="") }}
         </div>
         <p>Add Option A</p>
         <div class = "form-group">
-            {{render_field(option_a=add_question_forms.option_a)}}
+{#            {{ render_field(option_a=add_question_forms.option_a) }}#}
         </div>
         <p>Add Option B</p>
         <div class = "form-group">
-            {{render_field(option_b=add_question_forms.option_b)}}
+{#            {{render_field(option_b=add_question_forms.option_b)}}#}
         </div>
         <p>Add Option C</p>
         <div class = "form-group">
-            {{render_field(option_c=add_question_forms.option_c)}}
+{#            {{render_field(option_c=add_question_forms.option_c)}}#}
         </div>
         <p>Add Option D</p>
         <div class = "form-group">
-            {{render_field(option_d=add_question_forms.option_d)}}
+{#            {{render_field(option_d=add_question_forms.option_d)}}#}
         </div>
         <p>Correct Answer element missing</p> 
         <br>
         <p>Submit</p>
         <p><input type="submit"  value = "Submit"></p>
     </form>
-
-{%endblock%}
+</div>
+{% endblock body %}
