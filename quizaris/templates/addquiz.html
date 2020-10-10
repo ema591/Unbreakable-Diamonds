@@ -41,12 +41,13 @@
             </div>
 
         </fieldset>
-        <br>
-
-        {{ form.submit.label(class="") }}
-        {{ form.submit(class="") }}
+        <br>      
     </form>
 
+
     {% endfor %}
+
+    {{ form.submit.label(class="") }}
+    {{ form.submit(class="") }}
 
     {% endblock body %}
