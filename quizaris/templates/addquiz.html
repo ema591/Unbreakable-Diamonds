@@ -39,12 +39,11 @@
                 {{ add_question_forms[i].option_d.label(class="form-control-label") }}
                 {{ add_question_forms[i].option_d(class="form-control-label") }}
             </div>
-            {% endfor %}
+
         </fieldset>
 
-        {{submit.label(class="") }}
-        {{submit(class="") }}
+        <button type="button" class="btn small help-button">Submit</button>
     </form>
-  
+    {% endfor %}
 
     {% endblock body %}
