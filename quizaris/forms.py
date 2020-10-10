@@ -49,6 +49,7 @@ class AddQuestion(FlaskForm):
     option_d = StringField('Option D', render_kw={"placeholder": "Option D"})
     answer = IntegerField('Answer', validators=[DataRequired()],
                           render_kw={"placeholder": "1 for A, 2 for B, 3 for C, 4 for D"})
+    solution_explanation = StringField('Explanation', validators=[DataRequired()], render_kw={"placeholder": "Explanantion for the solution"})
     submit = SubmitField('Submit Question')
 
 

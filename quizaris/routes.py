@@ -79,23 +79,26 @@ def addquiz():
         add_question_forms.append(AddQuestion())
     # MakeQuiz instance
     quiz_form = MakeQuiz()
-    # Keeps count of the valid questions.
-    valid_questions = 0
-    for i in range(10):
-        if add_question_forms[i].validate():
-            add_question = Question(question=add_question_forms[i].question, option_a=add_question_forms[i].option_a,
-                                    option_b=add_question_forms[i].option_b, option_c=add_question_forms[i].option_c,
-                                    option_d=add_question_forms[i].option_d)
-            db.session.add(add_question)
-            db.session.commit()
-            valid_questions += 1
+    current_users_data = User.query.filter_by(email=current_user.email).first()
     # Check if the questions submitted are more than 5
-    if valid_questions > 5 and quiz_form.validate_on_submit():
-        author = User.query.filter_by(email=current_user.email).first()
+    if quiz_form.validate_on_submit():
         add_quiz = Quiz(quizname=quiz_form.quizname.data, category=quiz_form.category.data,
-                        difficulty=quiz_form.difficulty.data, user_id=author.id)
+                        difficulty=quiz_form.difficulty.data, user_id=current_users_data.id)
         db.session.add(add_quiz)
         db.session.commit()
+        # After comitting the quiz we need to retrieve its id to use for adding forms
+        get_quiz_id = Quiz.query.filter_by(quizname=quiz_form.quizname.data, category=quiz_form.category.data,
+                        difficulty=quiz_form.difficulty.data, user_id=current_users_data.id).first()
+        for i in range(10):
+            if add_question_forms[i].validate():
+                add_question = Question(question=add_question_forms[i].question.data,
+                                        option_a=add_question_forms[i].option_a.data,
+                                        option_b=add_question_forms[i].option_b.data,
+                                        option_c=add_question_forms[i].option_c.data,
+                                        option_d=add_question_forms[i].option_d.data, answer=add_question_forms[i].answer.data, solution_explanation=add_question_forms[i].solution_explanation.data ,user_id=current_users_data.id, quiz_id=get_quiz_id.id )
+                db.session.add(add_question)
+                db.session.commit()
+        author = User.query.filter_by(email=current_user.email).first()
 
     # The forms variable is an array that contains 10 instances of the AddQuestion form.
     return render_template("addquiz.html", title="Add Questions", add_question_forms=add_question_forms, quiz_form=quiz_form)
