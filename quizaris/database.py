@@ -74,7 +74,6 @@ class Quiz(db.Model):
     quizname = db.Column(db.String(100), nullable=False)
     comments = db.relationship('Comments', backref='comments',
                                lazy=True)  # Lazy true means that sqlalchemy will load all the data in one go
-    rate = db.relationship('Rating', backref='rate', lazy=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     difficulty = db.Column(db.String(10), nullable=False)
     # Category of the questions will be stored here
