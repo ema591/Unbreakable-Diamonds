@@ -11,7 +11,8 @@
     <form method = "POST" action = "">
        <p>What is your question</p>
         <div class = "form-group">
-            {{add_question_forms[i].question}}
+            {{add_question_forms[i].question.label(class = "")}}
+            {{add_question_forms[i].question(class = "")}}
         </div>
         <p>Add Option A</p>
         <div class = "form-group">
