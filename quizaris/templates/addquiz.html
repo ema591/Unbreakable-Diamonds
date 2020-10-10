@@ -13,29 +13,30 @@
         {{ form.hidden_tag() }}
         <fieldset class="form-group">
             <div class="form-group">
-                {% for forms in add_question_forms }
-                {{ add_question_forms[i].question.label(class="form-control-label") }}
-                {{ add_question_forms[i].question(class="form-control-label") }}
+                {% for form in add_question_forms %}
+               
+                {{ form.question.label(class="form-control-label") }}
+                {{ form.question(class="form-control-label") }}
             </div>
 
             <div class="form-group">
-                {{ add_question_forms[i].option_a.label(class="form-control-label") }}
-                {{ add_question_forms[i].option_a(class="form-control-label") }}
+                {{ form.option_a.label(class="form-control-label") }}
+                {{ form.option_a(class="form-control-label") }}
             </div>
 
             <div class="form-group">
-                {{ add_question_forms[i].option_b.label(class="form-control-label") }}
-                {{ add_question_forms[i].option_b(class="form-control-label") }}
+                {{ form.option_b.label(class="form-control-label") }}
+                {{ form.option_b(class="form-control-label") }}
             </div>
 
             <div class="form-group">
-                {{ add_question_forms[i].option_c.label(class="form-control-label") }}
-                {{ add_question_forms[i].option_c(class="form-control-label") }}
+                {{ form.option_c.label(class="form-control-label") }}
+                {{ form.option_c(class="form-control-label") }}
             </div>
 
             <div class="form-group">
-                {{ add_question_forms[i].option_d.label(class="form-control-label") }}
-                {{ add_question_forms[i].option_d(class="form-control-label") }}
+                {{ form.option_d.label(class="form-control-label") }}
+                {{ form.option_d(class="form-control-label") }}
             </div>
 
             
@@ -46,4 +47,5 @@
     </form>
 
     {% endfor %}
+
     {% endblock content %}
