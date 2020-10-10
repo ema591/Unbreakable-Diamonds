@@ -10,6 +10,7 @@
     {% for i in range(4) %}
     <form method = "POST" action = "">
        <p>What is your question</p>
+       {{ form.hidden_tag() }}
         <div class = "form-group">
             {{add_question_forms[i].question.label(class="")}}
             {{add_question_forms[i].question(class="")}}
