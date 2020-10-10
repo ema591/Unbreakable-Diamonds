@@ -1,37 +1,42 @@
 {% extends 'wireframe/addQuestiontemplate.html' %}
 
 {%block body%}
+
 <div class="container">
     <div class="jumbotron">
       <h1>Create a quiz</h1>      
       <p>Test your knowledge and be the best</p>
     </div>
-
+    {% for i in range(4) %}
     <form method = "POST" action = "">
        <p>What is your question</p>
         <div class = "form-group">
-            {{render_field(add_question_forms.question)}}
+            {{add_question_forms[i].question}}
         </div>
         <p>Add Option A</p>
         <div class = "form-group">
-            {{render_field(option_a=add_question_forms.option_a)}}
+            {{option_a=add_question_forms[i].option_a.label(class = "")}}
+            {{ add_question_forms[i].question(class="") }}
         </div>
         <p>Add Option B</p>
         <div class = "form-group">
-            {{render_field(option_b=add_question_forms.option_b)}}
+            {{option_b=add_question_forms[i].option_b.label(class = "")}}
+            {{option_b=add_question_forms[i].option_b(class = "")}}
         </div>
         <p>Add Option C</p>
         <div class = "form-group">
-            {{render_field(option_c=add_question_forms.option_c)}}
+            {{option_c=add_question_forms[i].option_c.label(class = "")}}
+            {{option_c=add_question_forms[i].option_c(class = "")}}
         </div>
         <p>Add Option D</p>
         <div class = "form-group">
-            {{render_field(option_d=add_question_forms.option_d)}}
+            {{option_d=add_question_forms[i].option_d.label(class = "")}}
+            {{option_d=add_question_forms[i].option_d(class = "")}}
         </div>
-        <p>Correct Answer element missing</p> 
         <br>
-        <p>Submit</p>
-        <p><input type="submit"  value = "Submit"></p>
+        {{ form.submit.label(class="") }}
+        {{ form.submit(class="") }}
     </form>
+    {% endfor %}
 
 {%endblock%}
