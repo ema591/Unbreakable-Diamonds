@@ -41,8 +41,9 @@
             </div>
             {% endfor %}
         </fieldset>
-
-        <button type="button" class="btn small help-button">Submit</button>
+        {{ quiz_form.submit.label(class="") }}
+        {{ quiz_form.submit(class="") }}
+        
     </form>
 
 
