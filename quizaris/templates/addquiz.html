@@ -7,7 +7,7 @@
       <h1>Create a quiz</h1>      
       <p>Test your knowledge and be the best</p>
     </div>
-    {% for i in range(4) %}
+    {% for form in form %}
     <form method = "POST" action = "">
        <p>What is your question</p>
        {{ form.hidden_tag() }}
