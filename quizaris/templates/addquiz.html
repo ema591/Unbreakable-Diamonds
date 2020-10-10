@@ -1,38 +1,49 @@
 {% extends 'wireframe/addQuestiontemplate.html' %}
 
 {% block body %}
+
+
+
 <div class="container">
     <div class="jumbotron">
-      <h1>Create a quiz</h1>      
-      <p>Test your knowledge and be the best</p>
+        <h1>Create a quiz</h1>
+        <p>Test your knowledge and be the best</p>
     </div>
 
-    <form method = "POST" action = "">
-       <p>What is your question</p>
-        <div class = "form-group">
-            {{ add_question_forms[0].question.label }}
-            {{ add_question_forms[0].question(class="") }}
-        </div>
-        <p>Add Option A</p>
-        <div class = "form-group">
-{#            {{ render_field(option_a=add_question_forms.option_a) }}#}
-        </div>
-        <p>Add Option B</p>
-        <div class = "form-group">
-{#            {{render_field(option_b=add_question_forms.option_b)}}#}
-        </div>
-        <p>Add Option C</p>
-        <div class = "form-group">
-{#            {{render_field(option_c=add_question_forms.option_c)}}#}
-        </div>
-        <p>Add Option D</p>
-        <div class = "form-group">
-{#            {{render_field(option_d=add_question_forms.option_d)}}#}
-        </div>
-        <p>Correct Answer element missing</p> 
-        <br>
-        <p>Submit</p>
-        <p><input type="submit"  value = "Submit"></p>
+    <form method="POST" action="">
+        <p>What is your question</p>
+        <fieldset class="form-group">
+            <div class="form-group">
+                {% for i in range(10) %}
+                {{ add_question_forms[i].hidden_tag() }}
+                {{ add_question_forms[i].question.label(class="form-control-label") }}
+                {{ add_question_forms[i].question(class="form-control-label") }}
+            </div>
+
+            <div class="form-group">
+                {{ add_question_forms[i].option_a.label(class="form-control-label") }}
+                {{ add_question_forms[i].option_a(class="form-control-label") }}
+            </div>
+
+            <div class="form-group">
+                {{ add_question_forms[i].option_b.label(class="form-control-label") }}
+                {{ add_question_forms[i].option_b(class="form-control-label") }}
+            </div>
+
+            <div class="form-group">
+                {{ add_question_forms[i].option_c.label(class="form-control-label") }}
+                {{ add_question_forms[i].option_c(class="form-control-label") }}
+            </div>
+
+            <div class="form-group">
+                {{ add_question_forms[i].option_d.label(class="form-control-label") }}
+                {{ add_question_forms[i].option_d(class="form-control-label") }}
+            </div>
+
+        </fieldset>
+
+        <button type="button" class="btn small help-button">Submit</button>
     </form>
-</div>
-{% endblock body %}
+    {% endfor %}
+
+    {% endblock body %}
