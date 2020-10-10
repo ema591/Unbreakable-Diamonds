@@ -12,33 +12,36 @@
        <p>What is your question</p>
        {{ form.hidden_tag() }}
         <div class = "form-group">
-            {{form.add_question_forms[i].question.label(class="")}}
-            {{form.add_question_forms[i].question(class="")}}
+            {{form.add_question_forms[i].question.label(class="form-control-label")}}
+            {{form.add_question_forms[i].question(class="form-control-label")}}
         </div>
         <p>Add Option A</p>
         <div class = "form-group">
-            {{form.option_a=add_question_forms[i].option_a.label(class="")}}
-            {{ form.add_question_forms[i].question(class="") }}
+            {{form.option_a=add_question_forms[i].option_a.label(class="form-control-label")}}
+            {{ form.add_question_forms[i].question(class="form-control-label")}}
         </div>
         <p>Add Option B</p>
         <div class = "form-group">
-            {{form.option_b=add_question_forms[i].option_b.label(class="")}}
-            {{form.option_b=add_question_forms[i].option_b(class="")}}
+            {{form.option_b=add_question_forms[i].option_b.label(class="form-control-label")}}
+            {{form.option_b=add_question_forms[i].option_b(class="form-control-label")}}
         </div>
         <p>Add Option C</p>
         <div class = "form-group">
-            {{form.option_c=add_question_forms[i].option_c.label(class="")}}
-            {{form.option_c=add_question_forms[i].option_c(class="")}}
+            {{form.option_c=add_question_forms[i].option_c.label(class="form-control-label")}}
+            {{form.option_c=add_question_forms[i].option_c(class="form-control-label")}}
         </div>
         <p>Add Option D</p>
         <div class = "form-group">
-            {{form.option_d=add_question_forms[i].option_d.label(class="")}}
-            {{form.option_d=add_question_forms[i].option_d(class="")}}
+            {{form.option_d=add_question_forms[i].option_d.label(class="form-control-label")}}
+            {{form.option_d=add_question_forms[i].option_d(class="form-control-label")}}
         </div>
         <br>
-        {{ form.submit.label(class="") }}
-        {{ form.submit(class="") }}
+        {{ form.submit.label(class="form-control-label") }}
+        {{ form.submit(class="btn btn-outline-info") }}
     </form>
     {% endfor %}
 
 {%endblock%}
+
+
+
