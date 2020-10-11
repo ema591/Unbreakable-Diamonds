@@ -1,0 +1,68 @@
+{% extends 'wireframe/addQuestiontemplate.html' %}
+
+{% block body %}
+
+
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Create a quiz</h1>
+        <p>Test your knowledge and be the best</p>
+    </div>
+
+    <form method="POST" action="">
+        <p>What is your question</p>
+        <fieldset class="form-group">
+
+
+            <div class="form-group">
+                {% for i in range(10) %}
+                {% if add_question_forms[i].errors %}
+                {{ add_question_forms[i].hidden_tag() }}
+                {{ add_question_forms[i].question.label(class="form-control-label") }}
+                {{ add_question_forms[i].question(class="form-control-label") }}
+                <div class="invalid-feedback">
+                    {% for error in add_question_forms[i].errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{ add_question_forms[i](class="form-control form-control-lg") }}
+                {% endif %}
+            </div>
+
+
+            <div class="form-group">
+                {{ add_question_forms[i].option_a.label(class="form-control-label") }}
+                {{ add_question_forms[i].option_a(class="form-control-label") }}
+            </div>
+
+            <div class="form-group">
+                {{ add_question_forms[i].option_b.label(class="form-control-label") }}
+                {{ add_question_forms[i].option_b(class="form-control-label") }}
+            </div>
+
+            <div class="form-group">
+                {{ add_question_forms[i].option_c.label(class="form-control-label") }}
+                {{ add_question_forms[i].option_c(class="form-control-label") }}
+            </div>
+
+            <div class="form-group">
+                {{ add_question_forms[i].option_d.label(class="form-control-label") }}
+                {{ add_question_forms[i].option_d(class="form-control-label") }}
+            </div>
+
+            <div class="form-group">
+                {{ add_question_forms[i].answer.label(class="form-control-label") }}
+                {{ add_question_forms[i].answer(class="form-control-label") }}
+            </div>
+
+            {% endfor %}
+        </fieldset>
+        {{ quiz_form.submit.label(class="") }}
+        {{ quiz_form.submit(class="") }}
+
+    </form>
+
+
+    {% endblock body %}
