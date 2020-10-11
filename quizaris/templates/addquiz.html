@@ -18,9 +18,9 @@
                 {% for i in range(10) %}
                 {{ add_question_forms[i].hidden_tag() }}
                 {{ add_question_forms[i].question.label(class="form-control-label") }}
-                {% if form.email.errors %}
-
+               
                 <!-- error control-->
+                {% if add_question_forms[i].errors %}              
                 {{ add_question_forms[i](class="form-control form-control-lg is-invalid") }}
                 <div class="invalid-feedback">
                     {% for error in add_question_forms[i].errors %}
