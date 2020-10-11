@@ -18,7 +18,19 @@
                 {% for i in range(10) %}
                 {{ add_question_forms[i].hidden_tag() }}
                 {{ add_question_forms[i].question.label(class="form-control-label") }}
+                {% if form.email.errors %}
+
+                <!-- error control-->
+                {{ add_question_forms[i](class="form-control form-control-lg is-invalid") }}
+                <div class="invalid-feedback">
+                    {% for error in add_question_forms[i].errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                <!-- end error control-->
+                {% else %}
                 {{ add_question_forms[i].question(class="form-control-label") }}
+                {% endif %}
             </div>
 
             <div class="form-group">
@@ -45,8 +57,8 @@
                 {{ add_question_forms[i].solution_explanation(class="form-control-label") }}
             </div>
 
-                    {{ add_question_forms[i].answer.label(class="form-control-label") }}
-                {{ add_question_forms[i].answer(class="form-control-label") }}
+            {{ add_question_forms[i].answer.label(class="form-control-label") }}
+            {{ add_question_forms[i].answer(class="form-control-label") }}
             {% endfor %}
         </fieldset>
         {{ quiz_form.category.label(class="") }}
@@ -57,7 +69,7 @@
 
         {{ quiz_form.submit.label(class="") }}
         {{ quiz_form.submit(class="") }}
-        
+
     </form>
 
 
