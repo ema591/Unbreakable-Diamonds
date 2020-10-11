@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html>
+
 <head>
 	<title>Testing form</title>
 </head>
+
 <body>
 	<style type="text/css">
-		
+
 	</style>
 	<div class="content-section">
 		<form method="POST" action="">
@@ -16,19 +18,70 @@
 				<legend class="border-bottom mb-4">Join Today</legend>
 				<div class="form-group">
 					{{ form.username.label(class="") }}
-					{{ form.username(class="") }}
-					{{ form.email.label(class="") }}
-					{{ form.email(class="") }}
-					{{ form.password.label(class="") }}
-					{{ form.password(class="") }}
-					{{ form.confirm_password.label(class="") }}
-					{{ form.confirm_password(class="") }}
+					<!-- error control-->
+					{% if form.username.errors %}
+					{{ form.username(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.username.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
 					</div>
+					<!-- end error control-->
+					{% else %}
+					{{ form.username(class="") }}
+					{% endif %}
+
+
+					{{ form.email.label(class="") }}
+					<!-- error control-->
+					{% if form.email.errors %}
+					{{ form.email(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.email.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+					<!-- end error control-->
+					{% else %}
+					{{ form.email(class="") }}
+					{% endif %}
+					
+					{{ form.password.label(class="") }}
+					<!-- error control-->
+					{% if form.password.errors %}
+					{{ form.password(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.password.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+					<!-- end error control-->
+					{% else %}
+					{{ form.password(class="") }}
+                    {% endif %}
+					
+					
+					{{ form.confirm_password.label(class="") }}
+					<!-- error control-->
+					{% if form.confirm_password.errors %}
+					{{ form.confirm_password(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.confirm_password.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+					<!-- end error control-->
+					{% else %}
+					{{ form.confirm_password(class="") }}
+					{% endif %}
+
+				</div>
 			</fieldset>
-					{{ form.submit.label(class="") }}
-					{{ form.submit(class="") }}
+			{{ form.submit.label(class="") }}
+			{{ form.submit(class="") }}
 			{% endblock content %}
 		</form>
 	</div>
 </body>
+
 </html>
