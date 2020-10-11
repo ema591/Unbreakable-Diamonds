@@ -101,18 +101,7 @@
             
             <div class="form-group">
                 {{ add_question_forms[i].solution_explanation.label(class="form-control-label") }}
-                 <!-- error control-->
-                 {% if add_question_forms[i].solution_explanation.errors %}              
-                 {{ (class="form-control form-control-lg is-invalid") }}
-                 <div class="invalid-feedback">
-                     {% for error in add_question_forms[i].solution_explanation.errors %}
-                     <span>{{ error }}</span>
-                     {% endfor %}
-                 </div>
-                 <!-- end error control-->
-                 {% else %}
                 {{ add_question_forms[i].solution_explanation(class="form-control-label") }}
-                {% endif %}
             </div>
 
             {{ add_question_forms[i].answer.label(class="form-control-label") }}
