@@ -20,26 +20,71 @@
                 {{ add_question_forms[i].hidden_tag() }}
                 {{ add_question_forms[i].question.label(class="form-control-label") }}
                 {{ add_question_forms[i].question(class="form-control-label") }}
+                <div class="invalid-feedback">
+                    {% for error in add_question_forms[i].errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{add_question_forms[i](class="form-control form-control-lg") }}
+                {% endif %}
             </div>
 
             <div class="form-group">
                 {{ add_question_forms[i].option_a.label(class="form-control-label") }}
                 {{ add_question_forms[i].option_a(class="form-control-label") }}
+
+                <div class="invalid-feedback">
+                    {% for error in add_question_forms[i].option_a.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{add_question_forms[i].option_a(class="form-control form-control-lg") }}
+                {% endif %}
+                
             </div>
 
             <div class="form-group">
                 {{ add_question_forms[i].option_b.label(class="form-control-label") }}
                 {{ add_question_forms[i].option_b(class="form-control-label") }}
+                
+                <div class="invalid-feedback">
+                    {% for error in add_question_forms[i].option_b.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{add_question_forms[i].option_b(class="form-control form-control-lg") }}
+                {% endif %}
             </div>
 
             <div class="form-group">
                 {{ add_question_forms[i].option_c.label(class="form-control-label") }}
                 {{ add_question_forms[i].option_c(class="form-control-label") }}
+
+                <div class="invalid-feedback">
+                    {% for error in add_question_forms[i].option_c.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{add_question_forms[i].option_c(class="form-control form-control-lg") }}
+                {% endif %}
             </div>
 
             <div class="form-group">
                 {{ add_question_forms[i].option_d.label(class="form-control-label") }}
                 {{ add_question_forms[i].option_d(class="form-control-label") }}
+
+                <div class="invalid-feedback">
+                    {% for error in add_question_forms[i].option_d.errors %}
+                    <span>{{ error }}</span>
+                    {% endfor %}
+                </div>
+                {% else %}
+                {{add_question_forms[i].option_d(class="form-control form-control-lg") }}
+                {% endif %}
             </div>
 
             <div class="form-group">
@@ -47,11 +92,13 @@
                 {{ add_question_forms[i].answer(class="form-control-label") }}
             </div>
 
+            {{ add_question_forms[i].answer.label(class="form-control-label") }}
+            {{ add_question_forms[i].answer(class="form-control-label") }}
             {% endfor %}
         </fieldset>
         {{ quiz_form.submit.label(class="") }}
         {{ quiz_form.submit(class="") }}
-        
+
     </form>
 
 
