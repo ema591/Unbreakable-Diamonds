@@ -1,0 +1,32 @@
+{% extends 'wireframe/addQuestiontemplate.html' %}
+
+{% block body %}
+
+
+
+<div class="container">
+    <div class="jumbotron">
+        <h1>Challenge your might and solve the quiz</h1>
+        <p>Expand your knowledge at quizaris</p>
+    </div>
+
+    <form method="POST" action="">
+        <p>Please answer the questions</p>
+        <fieldset class="form-group">
+
+
+            <div class="form-group">
+                {% for i in range(10) %}
+                {% if add_question_forms[i].errors %}
+                {{ add_question_forms[i].hidden_tag() }}
+                {{ add_question_forms[i].question.label(class="form-control-label") }}
+                {{ add_question_forms[i].question(class="form-control-label") }}
+                
+        </fieldset>
+        {{ quiz_form.submit.label(class="") }}
+        {{ quiz_form.submit(class="") }}
+
+    </form>
+
+
+    {% endblock body %}
