@@ -7,7 +7,12 @@
 <body>
 {% block content %}
 
-<h1>You should only see this if you have logged in. Username: {{ username }}, Email {{ email }}</h1>
+<h1>congrats you  have logged in. Username: {{ username }}, Email {{ email }}</h1>
+
+<br>
+{{ quizzes_done.label(class="")}}
+{{ quizzes_done(class="form-control-label") }}
+
 {% endblock content %}
 
 </body>
