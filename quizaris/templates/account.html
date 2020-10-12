@@ -1,28 +1,14 @@
-{% extends 'wireframe/addQuestiontemplate.html' %}
-
-{% block body %}
-
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
 <body>
-<div class="container">
-    <form method="POST" action="">
-        {% block content %}
-        <!-- Hidden tag will add a csrf token-->
-        {{ current_users_data.hidden_tag() }}
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Search - Quazzaris</legend>
-            <div class="form-group">
-                {{ current_users_data.label(class="") }}
-                {{ current_users_data(class="") }}
-            </div>
+{% block content %}
 
-            <div class="form-group">
-                {{  quizzes_done.label(class="") }}
-                {{  quizzes_done(class="") }}
-            </div>
-        </fieldset>
-        {% endblock content %}
-    </form>
+<h1>You should only see this if you have logged in. Username: {{ username }}, Email {{ email }}</h1>
+{% endblock content %}
 
 </body>
 </html>
-
