@@ -2,14 +2,11 @@
 
 {% block body %}
 
-
 <h1>congrats you  have logged in. Username: {{ username }}, Email {{ email }}</h1>
 
 <br>
 
-{{ quizzes_done.label(class="")}}
+{{ quizzes_done.label(class="form-control-label")}}
 {{ quizzes_done(class="form-control-label") }}
-
-{% endblock content %}
 
 {% endblock body %}
