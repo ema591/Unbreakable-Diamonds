@@ -6,6 +6,7 @@
 <div class="container">
     <form method="POST" action="">
         {% block content %}
+        <p>choose quiz</p>
         <!-- Hidden tag will add a csrf token-->
         {{ choose_quiz_type_form.hidden_tag() }}
         <fieldset class="form-group">
