@@ -47,9 +47,34 @@
 				<legend class="border-bottom mb-4">Join Quazzaris</legend>
 				<div class="form-group">
 					{{ form.email.label(class="") }}
+					<!-- error control-->
+					{% if form.email.errors %}
+					{{ form.email(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.email.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+					<!-- end error control-->
+					{% else %}
 					{{ form.email(class="") }}
+					{% endif %}
+                   
+             
 					{{ form.password.label(class="") }}
+					<!-- error control-->
+					{% if form.email.errors %}
+					{{ form.email(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.email.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+					<!-- end error control-->
+					{% else %}
 					{{ form.password(class="") }}
+					{% endif %}
+					
 				</div>
 			</fieldset>
 			{{ form.submit.label(class="") }}
