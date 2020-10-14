@@ -11,6 +11,16 @@
             <div class="form-group">
                 {{choose_quiz_type_form.category(class="form-control-label") }}
             </div>
+
+            <div class="form-group">
+                {{choose_quiz_type_form.category(class="form-control-label") }}
+            </div>
+            {% for i in range(1) %}
+            <div class="form-group">
+                {{possible_quizzes[i](class="form-control-label") }}
+            </div>
+            {% endfor %}
+
         </fieldset>
         
     </form>
