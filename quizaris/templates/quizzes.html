@@ -3,7 +3,7 @@
 {% block body %}
 
     
-<form method="POST" action="/quizaris/templates/quiz.html">
+<form method="POST" action="">
         <p>quizzies</p>
         <fieldset class="form-group">
             <div class="form-group">
@@ -15,8 +15,14 @@
                 {{  choose_quiz_type_form.difficulty.label }}
                 {{  choose_quiz_type_form.difficulty}}
             </div>
+
+            <div class="form-group">
+                {{  select_quiz_to_do.select_box_quizzes.data.label }}
+                {{ select_quiz_to_do.select_box_quizzes.data}}
+            </div>
         </fieldset>
     </form>
 
 
     {% endblock body %}
+
