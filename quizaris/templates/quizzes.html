@@ -2,15 +2,14 @@
 
 {% block body %}
 
-    <form method="POST" action="">
-        <p>Answer your question</p>
+    
+<form method="POST" action="/quizaris/templates/quiz.html">
+        <p>quizzies</p>
         <fieldset class="form-group">
             <div class="form-group">
-                {% for i in range(1) %}
-                {{  current_quiz_questions[i].answer.question.label }}
-                {{  current_quiz_questions[i].answer.question}}
+                {{  form.choose_quiz_type_form.label }}
+                {{  form.choose_quiz_type_form}}
             </div>
-            {% endfor %}
         </fieldset>
     </form>
 
