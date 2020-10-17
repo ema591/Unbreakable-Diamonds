@@ -1,20 +1,23 @@
-{% extends 'wireframe/addQuestiontemplate.html' %}
+{% extends 'wireframe/quiz.html' %}
 
 {% block body %}
 
-<div class="container">
     <form method="POST" action="">
-        <p>choose quiz</p>
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Search - Quazzaris</legend>
-            
-            <div class="form-group">
-                {{choose_quiz_type_form.category(class="form-control-label") }}
-            </div>
+        {{ quiz_form.hidden_tag() }}
+        {{ quiz_form.quizname.label}}
+        {{ quiz_form.quizname}}
 
-           
+        <p>Answer your question</p>
+        <fieldset class="form-group">
+            <div class="form-group">
+                {% for i in range(1) %}
+                {{ solve_question_array[i].hidden_tag() }}
+                {{ solve_question_array[i].question.label }}
+                {{ solve_question_array[i].question}}
+            </div>
+            {% endfor %}
         </fieldset>
-        
     </form>
+
 
     {% endblock body %}
