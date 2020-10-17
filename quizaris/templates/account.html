@@ -5,22 +5,3 @@
 <h1>congrats you have logged in. Username: {{ username }}, Email {{ email }}</h1>
 
 <br>
-
-<div class="container">
-    <form method="POST" action="">
-        <p>choose quiz</p>
-        <fieldset class="form-group">
-            <legend class="border-bottom mb-4">Search - Quazzaris</legend>
-
-            <div class="form-group">
-                {{choose_quiz_type_form.category(class="form-control-label") }}
-            </div>
-            
-            <div class="form-group">
-                {{quizzes_done}}
-            </div>
-        
-        </fieldset>
-    </form>
-</div>
-{% endblock body %}

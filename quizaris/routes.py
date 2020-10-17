@@ -76,12 +76,14 @@ def addquiz():
     # Use the index while accessing these with jinja
     add_question_forms = []
     for i in range(10):
-        add_question_forms.append(AddQuestion())
+        add_question_forms.append(AddQuestion(prefix="form"+str(i)))
     # MakeQuiz instance
     quiz_form = MakeQuiz()
     current_users_data = User.query.filter_by(email=current_user.email).first()
     # Check if the questions submitted are more than 5
-    if quiz_form.validate_on_submit():
+    print("UQUIZ")
+    if quiz_form.quizname.data:
+        print("Quiz is being submitted")
         add_quiz = Quiz(quizname=quiz_form.quizname.data, category=quiz_form.category.data,
                         difficulty=quiz_form.difficulty.data, user_id=current_users_data.id)
         db.session.add(add_quiz)
@@ -89,8 +91,11 @@ def addquiz():
         # After comitting the quiz we need to retrieve its id to use for adding forms
         get_quiz_id = Quiz.query.filter_by(quizname=quiz_form.quizname.data, category=quiz_form.category.data,
                         difficulty=quiz_form.difficulty.data, user_id=current_users_data.id).first()
+        print("submit")
         for i in range(10):
+
             if add_question_forms[i].validate():
+                print(add_question_forms[i])
                 add_question = Question(question=add_question_forms[i].question.data,
                                         option_a=add_question_forms[i].option_a.data,
                                         option_b=add_question_forms[i].option_b.data,
@@ -98,7 +103,6 @@ def addquiz():
                                         option_d=add_question_forms[i].option_d.data, answer=add_question_forms[i].answer.data, solution_explanation=add_question_forms[i].solution_explanation.data ,user_id=current_users_data.id, quiz_id=get_quiz_id.id )
                 db.session.add(add_question)
                 db.session.commit()
-        author = User.query.filter_by(email=current_user.email).first()
 
     # The forms variable is an array that contains 10 instances of the AddQuestion form.
     return render_template("addquiz.html", title="Add Questions", add_question_forms=add_question_forms, quiz_form=quiz_form)
