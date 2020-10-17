@@ -45,38 +45,9 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Register</div>
                     <div class="panel-body">
-                        <form method="POST">
-
-                            <div class="form-group input-group">
-                                <label for="username" class="form-group input-group">Username</label>
-                                <div class="form-group input-group">
-                                    <input class="form-control"></input>
-                                </div>
-                            </div>
-                            <div class="form-group input-group">
-                                <label for="username" class="form-group input-group">Email</label>
-                                <div class="form-group input-group">
-                                    <input class="form-control" type="email"></input>
-                                </div>
-                            </div>
-                            <div class="form-group input-group">
-                                <label for="password" class="form-group input-group">Password</label>
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                                </div>
-                                <input class="form-control" placeholder="Create password" type="password">
-                            </div>
-                            <div class="form-group input-group">
-                                <div class="input-group-prepend">
-                                    <span class="input-group-text"> <i class="fa fa-lock"></i> </span>
-                                </div>
-                                <input class="form-control" placeholder="Repeat password" type="password">
-                            </div>
-                            <div class="form-group">
-                                <button type="submit" class="btn btn-primary btn-block"> Create Account  </button>
-                            </div>
-                            <p class="text-center">Already have an account? <a href="">Log In</a> </p>
-                        </form>
+                        {% block body %}
+        
+                        {%endblock body%}
 
                     </div>
                 </div>
