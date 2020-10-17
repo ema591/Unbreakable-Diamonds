@@ -1,12 +1,6 @@
-{% extends 'wireframe/addQuestiontemplate.html' %}
+{% extends 'wireframe/quizzes.html' %}
 
 {% block body %}
-
-<div class="container">
-    <div class="jumbotron">
-        <h1>Create a quiz</h1>
-        <p>Test your knowledge and be the best</p>
-    </div>
 
     <form method="POST" action="">
         {{ quiz_form.hidden_tag() }}
