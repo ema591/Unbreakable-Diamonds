@@ -7,9 +7,8 @@
         <fieldset class="form-group">
             <div class="form-group">
                 {% for i in range(1) %}
-                {{ solve_question_array[i].hidden_tag() }}
-                {{ solve_question_array[i].question.label }}
-                {{ solve_question_array[i].question}}
+                {{  current_quiz_questions[i].answer.question.label }}
+                {{  current_quiz_questions[i].answer.question}}
             </div>
             {% endfor %}
         </fieldset>
