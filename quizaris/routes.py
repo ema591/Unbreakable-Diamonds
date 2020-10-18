@@ -103,7 +103,7 @@ def addquiz():
                                         option_d=add_question_forms[i].option_d.data, answer=add_question_forms[i].answer.data, solution_explanation=add_question_forms[i].solution_explanation.data ,user_id=current_users_data.id, quiz_id=get_quiz_id.id )
                 db.session.add(add_question)
                 db.session.commit()
-                return redirect(url_for("addquiz"))
+        return redirect(url_for("addquiz"))
     # The forms variable is an array that contains 10 instances of the AddQuestion form.
     return render_template("addquiz.html", title="Add Questions", add_question_forms=add_question_forms, quiz_form=quiz_form)
 
@@ -154,6 +154,7 @@ def logout():
 def quiz(quiz_id):
     # This will return an array of questions that have the quiz_id of the current quiz
     current_quiz_questions = Question.query.filter_by(quiz_id=quiz_id).all()
+    print(current_quiz_questions)
     # These are the variables set which should be displayed at the end.
     correct_answers = 0
     wrong_answers = 0
@@ -211,3 +212,20 @@ def account():
         update_account_form.email.data = current_user.email
 
     return render_template('account.html',update_account_form=update_account_form, username=current_user.username, email=current_user.email, done_quizzes=done_quizzes_array)
+
+
+@app.route("/rating/<quiz_id>", methods=["GET", "POST"])
+@login_required
+def rating(quiz_id):
+    add_rating_form = Ratings()
+    current_users_data = User.query.filter_by(email=current_user.email).first()
+    current_quiz = Quiz.query.filter_by(id=quiz_id).first()
+    previous_ratings = Rating.query.filter_by(quiz_id=quiz_id).all()
+    num_previous_ratings = len(previous_ratings)
+    if add_rating_form.validate_on_submit():
+        print("adding rating")
+        add_rating = Rating(user_id=current_users_data.id, quiz_id=quiz_id, username=current_user.username, user_rating=add_rating_form.rating.data)
+        db.session.add(add_rating)
+        db.session.commit()
+        return redirect(url_for('rating'))
+    return render_template('rating.html', num_previous_ratings=num_previous_ratings, current_quiz=current_quiz, add_rating_form=add_rating_form, previous_ratings=previous_ratings)

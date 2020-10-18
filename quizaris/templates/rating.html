@@ -1,0 +1,23 @@
+{% extends 'wireframe/addquiz.html' %}
+{% block body %}
+    <h1>{{ current_quiz.quizname }}</h1>
+    <p>Ratings can be added and/or viewed below</p>
+    <h2>All the previous ratings</h2>
+    {% for i in range(num_previous_ratings) %}
+        <p>Rating:
+        {{ previous_ratings[i].user_rating }}
+        </p>
+        <p>Users id who left rating:
+        {{ previous_ratings[i].username }}
+        </p>
+    {% endfor %}
+    <form method="POST" action="">
+    			<fieldset class="form-group">
+
+    {{ add_rating_form.rating.label }}
+    {{ add_rating_form.rating }}
+    {{ add_rating_form.submit.label }}
+    {{ add_rating_form.submit }}
+                </fieldset>
+    </form>
+{% endblock body %}

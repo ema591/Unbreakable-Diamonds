@@ -95,3 +95,4 @@ class Rating(db.Model):
     user_rating = db.Column(db.Integer)
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
+    username = db.Column(db.String(200), nullable=False)

@@ -46,6 +46,8 @@
 			{{ update_account_form.submit(class="") }}
 		</form>
 <h1>Quizzes done by you</h1>
-{{ done_quizzes[0].quizname }}
+{% if done_quizzes %}
+    {{ done_quizzes[0].quizname }}
+{% endif %}
 {% endblock body %}
 
