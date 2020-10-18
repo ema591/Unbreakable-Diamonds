@@ -10,10 +10,24 @@
         <p>Answer your question</p>
         <fieldset class="form-group">
             <div class="form-group">
-                {% for i in range(1) %}
-                {{ solve_question_array[i].hidden_tag() }}
-                {{ solve_question_array[i].question.label }}
-                {{ solve_question_array[i].question}}
+                {% for i in range(10) %}
+                {{ solve_question_array[i].option_a.label }}
+                {{solve_question_array[i].option_a}}
+            </div>
+
+            <div class="form-group">
+                {{ solve_question_array[i].option_b.label }}
+                {{ solve_question_array[i].option_b}
+            </div>
+
+            <div class="form-group">
+                {{ solve_question_array[i].option_c.label }}
+                {{ solve_question_array[i].option_c}
+            </div>
+
+            <div class="form-group">
+                {{ solve_question_array[i].option_d.label }}
+                {{ solve_question_array[i].option_d}
             </div>
             {% endfor %}
         </fieldset>
