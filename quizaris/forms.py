@@ -6,7 +6,7 @@
 # Flask forms will be used to make forms for submissions
 from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, RadioField
-from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
+from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError, NumberRange
 from quizaris.database import *
 from flask_login import current_user
 
@@ -114,3 +114,7 @@ class EditProfile(FlaskForm):
             email = User.query.filter_by(email=email.data).first()
             if email:
                 raise ValidationError('A user with that email already exists')
+
+class Ratings(FlaskForm):
+    rating = IntegerField('Rating', render_kw={"placeholder": "Enter a number between 1 - 5"}, validators=[DataRequired()])
+    submit = SubmitField()
