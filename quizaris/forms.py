@@ -8,7 +8,7 @@ from flask_wtf import FlaskForm
 from wtforms import StringField, PasswordField, SubmitField, BooleanField, IntegerField, SelectField, RadioField
 from wtforms.validators import DataRequired, Length, Email, EqualTo, ValidationError
 from quizaris.database import *
-
+from flask_login import current_user
 
 class RegistrationForm(FlaskForm):
     username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)],
@@ -93,3 +93,24 @@ class MakeQuiz(FlaskForm):
     submit = SubmitField('Make Quiz')
 
 
+class EditProfile(FlaskForm):
+    username = StringField('Username', validators=[DataRequired(), Length(min=2, max=20)],
+                           render_kw={"placeholder": "Username"})
+    email = StringField('Email', validators=[DataRequired(), Email()], render_kw={"placeholder": "Email address"})
+    submit = SubmitField('Update Profile')
+
+    # The following set of validation functions will check whether the user data exists in order to avoid conflicts
+    # in the database
+    def validate_username(self, username):
+        if username.data != current_user.username:
+            # If the username exists this user = True if not it will be None
+            user = User.query.filter_by(username=username.data).first()
+            if user:
+                # Validation error is built in to the wtforms.validators library and will be returned as a form error.
+                raise ValidationError('The username already exists! Please pick a different username!')
+
+    def validate_email(self, email):
+        if email.data != current_user.email:
+            email = User.query.filter_by(email=email.data).first()
+            if email:
+                raise ValidationError('A user with that email already exists')

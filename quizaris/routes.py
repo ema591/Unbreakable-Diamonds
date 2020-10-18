@@ -103,7 +103,7 @@ def addquiz():
                                         option_d=add_question_forms[i].option_d.data, answer=add_question_forms[i].answer.data, solution_explanation=add_question_forms[i].solution_explanation.data ,user_id=current_users_data.id, quiz_id=get_quiz_id.id )
                 db.session.add(add_question)
                 db.session.commit()
-
+                return redirect(url_for("addquiz"))
     # The forms variable is an array that contains 10 instances of the AddQuestion form.
     return render_template("addquiz.html", title="Add Questions", add_question_forms=add_question_forms, quiz_form=quiz_form)
 
@@ -192,10 +192,22 @@ def quiz(quiz_id):
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
 def account():
+    update_account_form = EditProfile()
     current_users_data = User.query.filter_by(email=current_user.email).first()
     quizzes_done = CompletedQuizzes.query.filter_by(user_id=current_users_data.id).all()
     done_quizzes_array = []
     for i in range(len(quizzes_done)):
         quiz_obj = Quiz.query.filter_by(id=quizzes_done[i].quiz_id).first()
         done_quizzes_array.append(quiz_obj)
-    return render_template('account.html', username=current_user.username, email=current_user.email, done_quizzes=done_quizzes_array)
+    # The following form will get the users data and update the database.
+    if update_account_form.validate_on_submit():
+        current_user.username = update_account_form.username.data
+        current_user.email = update_account_form.email.data
+        db.session.commit()
+        return redirect(url_for('account'))
+    # Populate the form with current users data
+    elif request.method == "GET":
+        update_account_form.username.data = current_user.username
+        update_account_form.email.data = current_user.email
+
+    return render_template('account.html',update_account_form=update_account_form, username=current_user.username, email=current_user.email, done_quizzes=done_quizzes_array)

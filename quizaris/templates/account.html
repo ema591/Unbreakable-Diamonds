@@ -5,6 +5,47 @@
 <p>Username: {{ username }}, Email {{ email }}<p>
 
 <br>
+    		<form method="POST" action="">
+			<!-- Hidden tag will add a csrf token-->
+			{{ update_account_form.hidden_tag() }}
+			<fieldset class="form-group">
+				<legend class="border-bottom mb-4">Update your profile</legend>
+				<div class="form-group">
+					{{ update_account_form.username.label(class="") }}
+					<!-- error control-->
+					{% if update_account_form.username.errors %}
+					{{ update_account_form.username(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in update_account_form.username.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+					<!-- end error control-->
+					{% else %}
+					{{ update_account_form.username(class="") }}
+					{% endif %}
+
+
+					{{ update_account_form.email.label(class="") }}
+					<!-- error control-->
+					{% if update_account_form.email.errors %}
+					{{ update_account_form.email(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in update_account_form.email.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+					<!-- end error control-->
+					{% else %}
+					{{ update_account_form.email(class="") }}
+					{% endif %}
+					</div>
+
+				</div>
+			</fieldset>
+			{{ update_account_form.submit(class="") }}
+		</form>
+<h1>Quizzes done by you</h1>
 {{ done_quizzes[0].quizname }}
 {% endblock body %}
 
