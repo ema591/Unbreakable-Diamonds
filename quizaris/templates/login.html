@@ -1,30 +1,50 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>Testing form</title>
-</head>
-<body>
-	<style type="text/css">
-		
-	</style>
-	<div class="content-section">
+
+{% extends 'wireframe/login.html' %}
+
+
+{% block body %}
+	<div class="container">
 		<form method="POST" action="">
 			{% block content %}
 			<!-- Hidden tag will add a csrf token-->
 			{{ form.hidden_tag() }}
 			<fieldset class="form-group">
-				<legend class="border-bottom mb-4">Join Today</legend>
+				<legend class="border-bottom mb-4">Join Quazzaris</legend>
 				<div class="form-group">
 					{{ form.email.label(class="") }}
-					{{ form.email(class="") }}
-					{{ form.password.label(class="") }}
-					{{ form.password(class="") }}
+					<!-- error control-->
+					{% if form.email.errors %}
+					{{ form.email(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.email.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
 					</div>
+					<!-- end error control-->
+					{% else %}
+					{{ form.email(class="") }}
+					{% endif %}
+                   
+             
+					{{ form.password.label(class="") }}
+					<!-- error control-->
+					{% if form.password.errors %}
+					{{ form.password(class="form-control form-control-lg is-invalid") }}
+					<div class="invalid-feedback">
+						{% for error in form.password.errors %}
+						<span>{{ error }}</span>
+						{% endfor %}
+					</div>
+					<!-- end error control-->
+					{% else %}
+					{{ form.password(class="") }}
+					{% endif %}
+
+				</div>
 			</fieldset>
-					{{ form.submit.label(class="") }}
-					{{ form.submit(class="") }}
+			{{ form.submit.label(class="") }}
+			{{ form.submit(class="") }}
 			{% endblock content %}
 		</form>
 	</div>
-</body>
-</html>
+	{% endblock body %}

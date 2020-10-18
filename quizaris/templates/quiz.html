@@ -1,0 +1,35 @@
+{% extends 'wireframe/quiz.html' %}
+
+{% block body %}
+
+    <form method="POST" action="">
+        <p>Answer your question</p>
+        <fieldset class="form-group">
+            <div class="form-group">
+                {% for i in range(10) %}
+                {{ solve_question_array[i].option_a.label }}
+                {{solve_question_array[i].option_a}}
+            </div>
+
+            <div class="form-group">
+                {{ solve_question_array[i].option_b.label }}
+                {{ solve_question_array[i].option_b}}
+            </div>
+
+            <div class="form-group">
+                {{ solve_question_array[i].option_c.label }}
+                {{ solve_question_array[i].option_c}}
+            </div>
+
+            <div class="form-group">
+                {{ solve_question_array[i].option_d.label }}
+                {{ solve_question_array[i].option_d}}
+            </div>
+            {% endfor %}            
+            {{submit_quiz.submit}}
+        </fieldset>
+    </form>
+
+
+    {% endblock body %}
+
