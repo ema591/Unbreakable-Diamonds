@@ -9,7 +9,7 @@ from quizaris import app, db, bcrypt
 # Import the database models/tables from the database.py file. 
 from quizaris.database import User, Question
 # Only import the relevant stuff for this file.
-from flask import render_template, url_for, flash, redirect
+from flask import render_template, url_for, flash, redirect,request
 # import the forms 	
 from quizaris.forms import *
 # Import the login function from the database file
@@ -115,7 +115,7 @@ def quizzes():
     # A search form which will be used to look for forms.
     search_form = Search()
     choose_quiz_type_form = ChooseTypeQuiz()
-    select_quiz_to_do = SelectWhatQuiz()
+    # select_quiz_to_do = SelectWhatQuiz()
     if choose_quiz_type_form.validate_on_submit():
         if choose_quiz_type_form.category:
             # This will be an array of questions so use a for loop in jinja
@@ -130,15 +130,16 @@ def quizzes():
         # This will be an array of questions so use a for loop in jinja
         # If no filters have been applied all the Quizzes are returned
         possible_quizzes = Quiz.query.all()
-    if select_quiz_to_do.validate_on_submit():
-        # Call the function quiz which would do the quiz for us.
-        # The following url for will grab the data from the quiz_id/ creates a dynamic route to it and allows the user to do the quiz.
-        return redirect(url_for('quiz', quiz_id=select_quiz_to_do.select_box_quizzes.data))
+    # if select_quiz_to_do.validate_on_submit():
+    #     # Call the function quiz which would do the quiz for us.
+    #     # The following url for will grab the data from the quiz_id/ creates a dynamic route to it and allows the user to do the quiz.
+    #     return redirect(url_for('quiz', quiz_id=select_quiz_to_do.select_box_quizzes.data))
     # The variables form, title and search_form are passed in to the template. The forms fields can be found in the
     # forms.py file.
     # List all the possible quizzes using a radio
+    total_possible_quizzes = len(possible_quizzes)
     # Possible quizzes is the data RETURNED by the database. So we are looking at using possible_quizzes[i].{valuies that are in the db }
-    return render_template('quizzes.html', title='Quizzes', choose_quiz_type_form=choose_quiz_type_form, possible_quizzes=possible_quizzes, search_form=search_form)
+    return render_template('quizzes.html', title='Quizzes', choose_quiz_type_form=choose_quiz_type_form, possible_quizzes=possible_quizzes, search_form=search_form, total_possible_quizzes=total_possible_quizzes)
 
 
 @app.route("/logout")
@@ -148,11 +149,11 @@ def logout():
     return redirect(url_for("home"))
 
 # The following function will be used to do the quiz themself.
-@app.route("/quiz/<quiz_id>")
+@app.route("/quiz/<quiz_id>", methods=['GET', 'POST'])
 @login_required
 def quiz(quiz_id):
     # This will return an array of questions that have the quiz_id of the current quiz
-    current_quiz_questions = Question.query.filter_by(id=quiz_id).all()
+    current_quiz_questions = Question.query.filter_by(quiz_id=quiz_id).all()
     # These are the variables set which should be displayed at the end.
     correct_answers = 0
     wrong_answers = 0
@@ -161,18 +162,30 @@ def quiz(quiz_id):
     solve_question_array = []
     for i in current_quiz_questions:
         solve_question_array.append(i)
-    if submit_quiz.validate_on_submit():
+    if submit_quiz.submit.data:
         for i in range(10):
-            # The following try will avoid any index out of bounds errors
-            try:
-                if solve_question_array[i].validate():
-                    if solve_question_array[i].options.data == current_quiz_questions[i].answer:
-                        correct_answers += 1
-                    else:
-                        wrong_answers += 1
-            except:
-                pass
+            """
+            names = questions id
+            options = questions id
+            """
+            for questions in solve_question_array:
+                if request.method == "POST":
+                    questions_data = request.form[str(questions.id)]
+                    # The following try will avoid any index out of bounds errors
+                    try:
+                        if questions_data == current_quiz_questions[i].answer:
+                            correct_answers += 1
+                        else:
+                            wrong_answers += 1
+                    except:
+                        pass
+                    break
 
+    if request.method == "POST":
+        current_users_data = User.query.filter_by(email=current_user.email).first()
+        completed = CompletedQuizzes(user_id=current_users_data.id, quiz_id=quiz_id)
+        db.session.add(completed)
+        db.session.commit()
     # Solve questions array is a an array that will contain all the form objects, so, like before use index's to get the form labels and input fields.
     return render_template('quiz.html', submit_quiz = submit_quiz, solve_question_array=solve_question_array, correct_answers=correct_answers, wrong_answers=wrong_answers)
 
@@ -180,5 +193,9 @@ def quiz(quiz_id):
 @login_required
 def account():
     current_users_data = User.query.filter_by(email=current_user.email).first()
-    quizzes_done = CompletedQuizzes.query.filter_by(user_id=current_users_data.id)
-    return render_template('account.html', username=current_user.username, email=current_user.email, quizzes_done=quizzes_done)
+    quizzes_done = CompletedQuizzes.query.filter_by(user_id=current_users_data.id).all()
+    done_quizzes_array = []
+    for i in range(len(quizzes_done)):
+        quiz_obj = Quiz.query.filter_by(id=quizzes_done[i].quiz_id).first()
+        done_quizzes_array.append(quiz_obj)
+    return render_template('account.html', username=current_user.username, email=current_user.email, done_quizzes=done_quizzes_array)

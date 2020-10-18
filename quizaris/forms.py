@@ -63,15 +63,18 @@ class ChooseTypeQuiz(FlaskForm):
 
 # pass in keyword args (kwargs) with a key value pair like a dictionary
 class SolveQuestion(FlaskForm):
+    # options = RadioField('Options', choices=[('1', "lala")])
     def __init__(self, **kwargs):
+        self.question_id = kwargs['question_id']
+        self.question_name = kwargs['question_name']
         self.option_a = kwargs['option_a']
         self.option_b = kwargs['option_b']
         self.option_c = kwargs['option_c']
         self.option_d = kwargs['option_d']
-
-        options = RadioField('Options',
-                             choices=[('1', self.option_a), ('2', self.option_b), ('3', self.option_c),
-                                      ('4', self.option_d)])
+        self.options = RadioField('Options',
+                                 choices=[('1', self.option_a), ('2', self.option_b), ('3', self.option_c),
+                                          ('4', self.option_d)])
+        super().__init__()
 
 class SubmitQuiz(FlaskForm):
     submit = SubmitField('Submit Quiz')
@@ -90,11 +93,3 @@ class MakeQuiz(FlaskForm):
     submit = SubmitField('Make Quiz')
 
 
-class SelectWhatQuiz(FlaskForm):
-    def __init__(self, **kwargs):
-        self.choices_list = []
-        for i in kwargs.items():
-            # Flip the values of the tuple around to work with the FlaskForm.
-            self.choices_list.append((i[1], i[0]))
-        select_box_quizzes = RadioField('Select Quiz', choices=self.choices_list)
-        submit = SubmitField('Select this quiz')
