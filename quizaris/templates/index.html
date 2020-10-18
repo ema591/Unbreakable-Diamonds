@@ -1,50 +1,110 @@
+
 <!DOCTYPE html>
-<html>
+<html lang="en">
 
 <head>
-    <title>SectionC</title>
-    <meta charset="UTF-8">
+    <title>Quizzaris</title>
+    <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" href="/static/style.css">
-    <!--Google fonts link -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="shortcut icon" href="/static/images/logo.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <link rel="stylesheet" href="index.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 <body>
+    <!--Navbar-->
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="collapse navbar-collapse" id="myNavbar">
+                <ul class="nav navbar-nav navbar-center">
+                    <li><a href="index"><i class="fa fa-home"></i> Home</a></li>
+                    <li><a href="addquiz"><i class="fa fa-cog" aria-hidden="true"></i> Create Quiz</a></li>
+                    <li><a href="quizzes"><i class="fa fa-address-book" aria-hidden="true"></i> Choose Quiz</a></li>
+                </ul>
 
-    {% block content %}
-    
-    {% endblock content %}
-
-    <header id="pageHeader">Quizzaris</header>
-
-    <nav id="nav">
-        <ul>
-            <li id="homePage"><a href="#">Home</a></li>
-            <li id="quizzes"><a href="#">Quizzes</a></li>
-            <li id="contact"><a href="#">Contact</a></li>
-        </ul>
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="login"><span class="glyphicon glyphicon-user"></span> Login</a></li>
+                    <li><a href="register"><i class="fa fa-book" aria-hidden="true"></i> Register</a></li>
+                    <li><a href="account"><i class="fa fa-archive" aria-hidden="true"></i> Account</a></li>
+                </ul>
+            </div>
+        </div>
     </nav>
 
-    <section id="main">
-        <h3 class="mainIntro">Quazzaris</h3>
-        <section class="quizzes">
-            <a href="/static/images/logo.png">Quiz 1</a>
-            <a href="/static/images/logo.png">Quiz 2</a>
-            <a href="/static/images/logo.png">Quiz 3</a>
-            <a href="/static/images/logo.png">Quiz 4</a>
-        </section>
+    <!--Jumbotron-->
+    <div class="jumbotron">
+        <div class="container text-center">
+            <h2>Quizzaris - a community driven study site. Made for students, by students</h2>
+            <input type="text" size="50" placeholder="Try a subject">
+            <button type="button" class="btn btn-primary mb-2">Search</button>
+        </div>
+    </div>
 
-        <section class="mainExtra">
-            <p>Some more info..</p>
-        </section>
-    </section>
+    <!--Quiz boxes-->
+    <div class="container">
+        <div class="row">
 
-    <nav id="side">Nav</nav>
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Discover Your knowledge</div>
+                    <div class="panel-body">
+                        <a href="quizzes.html" img src="" class="img-responsive" style="width:100%" alt="Image"></div>
+                </div>
+            </div>
 
-    <div id="siteAds">Ads</div>
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Sciences</div>
+                    <div class="panel-body">
+                        <a href="quizzes.html" img src="" class="img-responsive" style="width:100%" alt="Image"></div>
+                </div>
+            </div>
 
-    <footer id="pageFooter">Footer</footer>
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Maths</div>
+                    <div class="panel-body">
+                        <a href="quizzes.html" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">IT</div>
+                    <div class="panel-body">
+                        <a href="quizzes.html" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Business</div>
+                    <div class="panel-body">
+                        <a href="quizzes.html" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Arts</div>
+                    <div class="panel-body">
+                        <a href="quizzes.html" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
+                </div>
+            </div>
+
+            <div class="col-sm-4">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">Other</div>
+                    <div class="panel-body">
+                        <a href="quizzes.html" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
 </body>
+
 </html>

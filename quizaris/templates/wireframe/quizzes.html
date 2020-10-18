@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="index.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 <body>
@@ -41,53 +42,9 @@
     <div class="container">
         <div class="row">
 
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Sciences</div>
-                    <div class="panel-body">
-                        <a href="#" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Maths</div>
-                    <div class="panel-body">
-                        <a href="#" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">IT</div>
-                    <div class="panel-body">
-                        <a href="#" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Business</div>
-                    <div class="panel-body">
-                        <a href="#" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Arts</div>
-                    <div class="panel-body">
-                        <a href="#" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
-                </div>
-            </div>
-
-            <div class="col-sm-4">
-                <div class="panel panel-primary">
-                    <div class="panel-heading">Other</div>
-                    <div class="panel-body">
-                        <a href="#" img src="#" class="img-responsive" style="width:100%" alt="Image"></div>
-                </div>
-            </div>
+            {% block body %}
+        
+            {%endblock body%}
 
         </div>
     </div>

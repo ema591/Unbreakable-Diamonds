@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="addquiz.css">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
 </head>
 
 <body>
@@ -37,91 +38,10 @@
                 <div class="panel panel-primary">
                     <div class="panel-heading">Add quiz</div>
                     <div class="panel-body">
-
-                        <form method="POST">
-                            <div class="form-group row">
-                                <label for="quizname" class="col-sm-2 col-form-label">Quiz name</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="quizquestion" class="col-sm-2 col-form-label">Question</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="2"></textarea>
-                                </div>
-                            </div>
-
-                            <div class="form-group row">
-                                <label for="answers" class="col-sm-2 col-form-label">Answer option A</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="answers" class="col-sm-2 col-form-label">Answer option B</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="answers" class="col-sm-2 col-form-label">Answer option C</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="answers" class="col-sm-2 col-form-label">Answer option D</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control">
-                                </div>
-                            </div>
-                            <div class="form-group row">
-                                <label for="quizsolution" class="col-sm-2 col-form-label">Solution</label>
-                                <div class="col-sm-10">
-                                    <textarea class="form-control" rows="3"></textarea>
-                                </div>
-                            </div>
-
-                            <fieldset class="form-group row">
-                                <label for="category" class="col-sm-2 col-form-label">Category</label>
-                                <div class="col-sm-10">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="category" value="cat1">
-                                        <label class="form-check-label" for="category">
-                                        Category 1
-                                      </label>
-                                    </div>
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="radio" name="category" value="cat2">
-                                        <label class="form-check-label" for="category">
-                                        Category 2
-                                        </div>
-                                    </div>
-                            </fieldset>
-
-                            <fieldset class="form-group row">
-                                <label for="category" class="col-sm-2 col-form-label">Difficulty</label>
-                                        <div class="col-sm-10">
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="difficulty" value="cat1">
-                                                <label class="form-check-label" for="difficulty">
-                                        Easy
-                                      </label>
-                                            </div>
-                                            <div class="form-check">
-                                                <input class="form-check-input" type="radio" name="difficulty" value="cat2">
-                                                <label class="form-check-label" for="difficulty">
-                                        Hard
-                                        </div>
-                                    </div>
-                            </fieldset>
-
-                            <br>
-                            <div class="col-sm-10">
-                                <button type="submit" class="btn btn-primary">Submit quiz</button>
-                            </div>
-                        </form>
+                        {% block body %}
+        
+                        {%endblock body%}
+                        
                     </div>
                 </div>
             </div>
