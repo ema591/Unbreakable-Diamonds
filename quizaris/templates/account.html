@@ -39,15 +39,21 @@
 					{% else %}
 					{{ update_account_form.email(class="") }}
 					{% endif %}
+			{{ update_account_form.submit(class="") }}
 					</div>
 
 				</div>
 			</fieldset>
-			{{ update_account_form.submit(class="") }}
 		</form>
-<h1>Quizzes done by you</h1>
-{% if done_quizzes %}
-    {{ done_quizzes[0].quizname }}
-{% endif %}
+
+    <div class="container">
+        <h2>Quizzes done by you</h2>
+
+    {% if done_quizzes %}
+      {% for i in range(done_quizzes_len) %}
+         {{ done_quizzes[i].quizname }}
+        {% endfor %}
+    {% endif %}
+    </div>
 {% endblock body %}
 
