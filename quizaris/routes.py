@@ -222,10 +222,10 @@ def rating(quiz_id):
     current_quiz = Quiz.query.filter_by(id=quiz_id).first()
     previous_ratings = Rating.query.filter_by(quiz_id=quiz_id).all()
     num_previous_ratings = len(previous_ratings)
-    if add_rating_form.validate_on_submit():
+    if add_rating_form.submit.data:
         print("adding rating")
         add_rating = Rating(user_id=current_users_data.id, quiz_id=quiz_id, username=current_user.username, user_rating=add_rating_form.rating.data)
         db.session.add(add_rating)
         db.session.commit()
-        return redirect(url_for('rating'))
+        return redirect(url_for('rating', quiz_id=quiz_id))
     return render_template('rating.html', num_previous_ratings=num_previous_ratings, current_quiz=current_quiz, add_rating_form=add_rating_form, previous_ratings=previous_ratings)
