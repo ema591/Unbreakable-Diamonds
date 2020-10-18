@@ -7,11 +7,19 @@
         <fieldset class="form-group">
             {% for i in range(10) %}
                 <div class="form-group">
+                    <h3>{{ solve_question_array[i].question }}</h3>
                     <input type="radio" name="{{ solve_question_array[i].id }}" value="1">
                     <label>{{ solve_question_array[i].option_a }}</label><br>
                     <input type="radio" name="{{ solve_question_array[i].id }}" value="2"/>
                     <label>{{ solve_question_array[i].option_b }}</label><br>
-
+                    {% if solve_question_array[i].option_c %}
+                        <input type="radio" name="{{ solve_question_array[i].id }}" value="1">
+                        <label>{{ solve_question_array[i].option_c }}</label><br>
+                    {% endif %}
+                    {% if solve_question_array[i].option_d %}
+                    <input type="radio" name="{{ solve_question_array[i].id }}" value="2"/>
+                    <label>{{ solve_question_array[i].option_d }}</label><br>
+                    {% endif %}
                 </div>
 
                 </div>
