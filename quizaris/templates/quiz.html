@@ -3,11 +3,11 @@
 {% block body %}
 
     <form method="POST" action="">
-        <p>Answer your question</p>
+        <h2 class="alert alert-dark">Answer your questions</h2>
         <fieldset class="form-group">
-            {% for i in range(10) %}
+            {% for i in range(5) %}
                 <div class="form-group">
-                    <h3>{{ solve_question_array[i].question }}</h3>
+                    <h3> {{ i+1 }}. {{ solve_question_array[i].question }}</h3>
                     <input type="radio" name="{{ solve_question_array[i].id }}" value="1">
                     <label>{{ solve_question_array[i].option_a }}</label><br>
                     <input type="radio" name="{{ solve_question_array[i].id }}" value="2"/>
@@ -20,7 +20,6 @@
                     <input type="radio" name="{{ solve_question_array[i].id }}" value="2"/>
                     <label>{{ solve_question_array[i].option_d }}</label><br>
                     {% endif %}
-                </div>
 
                 </div>
             {% endfor %}            

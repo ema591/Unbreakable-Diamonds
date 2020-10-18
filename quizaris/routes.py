@@ -75,7 +75,7 @@ def addquiz():
     # Forms is an array that will contain all the Add question form instances.
     # Use the index while accessing these with jinja
     add_question_forms = []
-    for i in range(10):
+    for i in range(5):
         add_question_forms.append(AddQuestion(prefix="form"+str(i)))
     # MakeQuiz instance
     quiz_form = MakeQuiz()
@@ -92,7 +92,7 @@ def addquiz():
         get_quiz_id = Quiz.query.filter_by(quizname=quiz_form.quizname.data, category=quiz_form.category.data,
                         difficulty=quiz_form.difficulty.data, user_id=current_users_data.id).first()
         print("submit")
-        for i in range(10):
+        for i in range(5):
 
             if add_question_forms[i].validate():
                 print(add_question_forms[i])
@@ -164,7 +164,7 @@ def quiz(quiz_id):
     for i in current_quiz_questions:
         solve_question_array.append(i)
     if submit_quiz.submit.data:
-        for i in range(10):
+        for i in range(5):
             """
             names = questions id
             options = questions id
@@ -210,8 +210,8 @@ def account():
     elif request.method == "GET":
         update_account_form.username.data = current_user.username
         update_account_form.email.data = current_user.email
-
-    return render_template('account.html',update_account_form=update_account_form, username=current_user.username, email=current_user.email, done_quizzes=done_quizzes_array)
+    done_quizzes_len = len(done_quizzes_array)
+    return render_template('account.html',done_quizzes_len=done_quizzes_len,update_account_form=update_account_form, username=current_user.username, email=current_user.email, done_quizzes=done_quizzes_array)
 
 
 @app.route("/rating/<quiz_id>", methods=["GET", "POST"])
