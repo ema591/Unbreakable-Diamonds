@@ -174,7 +174,7 @@ def quiz(quiz_id):
                 pass
 
     # Solve questions array is a an array that will contain all the form objects, so, like before use index's to get the form labels and input fields.
-    return render_template('quiz.html', current_quiz_questions=solve_question_array, correct_answers=correct_answers, wrong_answers=wrong_answers)
+    return render_template('quiz.html', submit_quiz = submit_quiz, solve_question_array=solve_question_array, correct_answers=correct_answers, wrong_answers=wrong_answers)
 
 @app.route("/account", methods=['GET', 'POST'])
 @login_required
