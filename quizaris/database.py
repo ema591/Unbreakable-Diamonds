@@ -64,7 +64,6 @@ class Question(db.Model):
 class CompletedQuizzes(db.Model):
     id = db.Column(db.Integer, primary_key=True, autoincrement=True, nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
-    quizzes_done = db.Column(db.String(200))
     quiz_id = db.Column(db.Integer, db.ForeignKey('quiz.id'), nullable=False)
 
 class Quiz(db.Model):

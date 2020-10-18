@@ -17,8 +17,14 @@
             </div>
 
             <div class="form-group">
-                {{  possible_quizzes.choices_list.label }}
-                {{  possible_quizzes.choices_list}}
+                {% if possible_quizzes %}
+                    {% for i in range(total_possible_quizzes) %}
+                        <a href="quiz/{{ possible_quizzes[i].id }}">
+                        {{  possible_quizzes[i].quizname }}
+                        </a>
+                    {{  possible_quizzes[i].difficulty}}
+                    {% endfor %}
+                {% endif %}
             </div>
             
         </fieldset>   
